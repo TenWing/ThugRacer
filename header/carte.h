@@ -38,7 +38,7 @@ struct Carte
  * @brief  Construit une carte de course
  * @param  tailleX la taille X de la matrice
  * @param  tailleY la taille Y de la matrice
- * @param  carburant la quantité de carbruant
+ * @param  carburant la quantité de carburant
  * @return         une carte initialisée
  */
 Carte construit_carte(int tailleX, int tailleY, int carburant);

@@ -13,20 +13,20 @@ Carte construit_carte(int tailleX, int tailleY, int carburant)
 	// Création de la carte
 	Carte carte;
 
-	int i = 0;
+	int i;
 
 	carte.tailleX = tailleX;
 	carte.tailleY = tailleY;
 	carte.carburant = carburant;
 
 	// Allocation de la zone mémoire pour les colonnes
-	carte.matrice = calloc(sizeof(char*), tailleY);
+	carte.matrice = (char**) malloc(sizeof(char*)*tailleY);
 
 	// Création et parcours de chaque pointeur
 	for(i = 0; i < tailleY; i++)
 	{
 		// Allocation de la zone mémoire pour les lignes
-		carte.matrice[i] = calloc(sizeof(char), tailleX);
+		carte.matrice[i] = (char*) malloc(sizeof(char)*tailleX);
 	}
 
 	return carte;
@@ -48,28 +48,28 @@ void detruire_carte(Carte* carte)
 Carte charge_carte(FILE* fichier)
 {
 	Carte carte;
-	int tx, ty, carbu, i, j;
+	int tx, ty, carbu, i, j=0;
 	char c;
 
-	// Ouverture d'un fichier de debug
-	FILE* debug = fopen("2pacsostrongomg.log", "w+");
+	FILE *debug_2 = fopen("fichier_debug_carte.txt", "w+");
 
 	fscanf(fichier, "%d %d %d", &tx, &ty, &carbu);
-	fprintf(debug, "%d %d %d\n", tx, ty, carbu);
 
 	carte = construit_carte(tx, ty, carbu);
 
-	// Placement en fin de ligne
-	while(fread(&c, sizeof(char), 1, stdin)==1 && c!='\n');
+	while(fread(&c, sizeof(char), 1, fichier)==1 && c!='\n');
 
 	// Parcours de chaque ligne du circuit
-	for(i = 0; i < ty; i++)
+	for (i = 0; i < ty; i++)
 	{
-		for(j = 0; j < tx; j++)
-		{
-			fscanf(fichier, "%c", &(carte.matrice[i][j]));
+		while(fread(&c, sizeof(char), 1, fichier)==1 && c!='\n') {
+			carte.matrice[i][j] = c;
+			fprintf(debug_2, "%c", carte.matrice[i][j]);
+			j++;
 		}
+		fprintf(debug_2, "\n");
 	}
 
+	fclose(debug_2);
 	return carte;
 }
