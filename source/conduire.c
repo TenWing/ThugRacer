@@ -108,6 +108,7 @@ int determination_direction(Pilote *pilote) {
 
 char* depart_pilote(Pilote *pilote)
 {
+	if(pilote->carte.matrice[pilote->coordy + pilote->accY - 5][pilote->coordx + pilote->accX])
 
 }
 

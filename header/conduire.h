@@ -99,7 +99,7 @@ void emplacement_pilote(Pilote *pilote, FILE *fichier);
  * @param pilote 
  * @return la position au serveur
  */
-char* depart_pilote(Pilote *pilote)
+char* depart_pilote(Pilote *pilote);
 
 /**
  * @brief  determine dans quelle direction doit aller le pilote
