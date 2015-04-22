@@ -100,6 +100,17 @@ void emplacement_pilote(Pilote *pilote, FILE *fichier) {
 
 //############################################################################
 
+int determination_direction(Pilote *pilote) {
+
+}
+
+//############################################################################
+
+char* depart_pilote(Pilote *pilote)
+{
+
+}
+
 //############################################################################
 
 char *avancer_pilote(Pilote *pilote) {

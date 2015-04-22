@@ -88,11 +88,18 @@ Pilote construire_pilote(FILE *fichier);
 void detruire_pilote(Pilote *pilote);
 
 /**
- * @brief  initialise le départ du pilote sur le circuit
+ * @brief initialise l'emplacement du pilote sur le circuit
  * @param pilote : le pilote de la course
  * @param fichier : le flux d'entrée
  */
 void emplacement_pilote(Pilote *pilote, FILE *fichier);
+
+/**
+ * @brief permet au pilote de partir au départ
+ * @param pilote 
+ * @return la position au serveur
+ */
+char* depart_pilote(Pilote *pilote)
 
 /**
  * @brief  determine dans quelle direction doit aller le pilote
