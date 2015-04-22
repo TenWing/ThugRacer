@@ -95,6 +95,12 @@ void detruire_pilote(Pilote *pilote);
 void emplacement_pilote(Pilote *pilote, FILE *fichier);
 
 /**
+ * @brief  determine dans quelle direction doit aller le pilote
+ * @param  pilote 
+ * @return un entier : correspondant à la direction où aller
+ */
+int determination_direction(Pilote *pilote);
+/**
  * fait avancer le pilote en ligne droite
  * @param pilote 
  * @return : les informations à envoyer au serveur
