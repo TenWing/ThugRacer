@@ -51,8 +51,6 @@ Carte charge_carte(FILE* fichier)
 	int tx, ty, carbu, i, j=0;
 	char c;
 
-	FILE *debug_2 = fopen("fichier_debug_carte.txt", "w+");
-
 	fscanf(fichier, "%d %d %d", &tx, &ty, &carbu);
 
 	carte = construit_carte(tx, ty, carbu);
@@ -64,12 +62,9 @@ Carte charge_carte(FILE* fichier)
 	{
 		while(fread(&c, sizeof(char), 1, fichier)==1 && c!='\n') {
 			carte.matrice[i][j] = c;
-			fprintf(debug_2, "%c", carte.matrice[i][j]);
 			j++;
 		}
-		fprintf(debug_2, "\n");
 	}
 
-	fclose(debug_2);
 	return carte;
 }

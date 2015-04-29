@@ -93,7 +93,7 @@ void detruire_pilote(Pilote *pilote);
  * @param fichier : le flux d'entrée
  */
 void emplacement_pilote(Pilote *pilote, FILE *fichier);
-
+int determination_position(char *tab, int debut);
 /**
  * @brief permet au pilote de partir au départ
  * @param pilote 
