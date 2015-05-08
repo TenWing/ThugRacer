@@ -124,4 +124,17 @@ void rouler_pilote(Pilote *pilote);
  * @return           le carburant consommé à l'instant t
  */
 int deltaCarburantAcceleration(int accX, int accY, int velX, int velY, int dansSable);
+
+/**
+ * @brief fonction qui permet au pilote de freiner
+ * @param pilote 
+ */
+void freiner_pilote(Pilote *pilote);
+
+/**
+ * @brief le pilote va tourner à droite
+ * @param pilote
+ */
+void touner_droite_pilote(Pilote *pilote);
+
 #endif

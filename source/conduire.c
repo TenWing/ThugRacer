@@ -167,8 +167,6 @@ void depart_pilote(Pilote *pilote)
 
 void rouler_pilote(Pilote *pilote) {
 
-	char action[10];
-
 	//Si la direction précedente est toujours bonne
 	if(pilote->carte.matrice[pilote->coordy + pilote->velY][pilote->coordx + pilote->velX] == '#')
 	{
@@ -192,4 +190,14 @@ void rouler_pilote(Pilote *pilote) {
 			pilote->accX = 0;
 		}
 	}
+}
+
+//############################################################################
+
+void freiner_pilote(Pilote *pilote) {
+
+}
+
+void touner_droite_pilote(Pilote *pilote) {
+	
 }
