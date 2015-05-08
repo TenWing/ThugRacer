@@ -135,18 +135,19 @@ int determination_direction(Pilote *pilote) {
 void depart_pilote(Pilote *pilote)
 {
 	//Ceci sont différents tests pour savoir dans quel sens partir
-	//écart de 2 car les pilotes sont séparés par un # sur la ligne de départ
-	if(pilote->carte.matrice[pilote->coordy-2][pilote->coordx] == '#') {
+	if(pilote->coordy-5 >=0 && pilote->carte.matrice[pilote->coordy-5][pilote->coordx] == '#') {
 
 		pilote->accY--;
 	}
 
-	else if(pilote->carte.matrice[pilote->coordy][pilote->coordx+2] == '#') {
+	else if(pilote->coordx+5 <= pilote->carte.tailleX && 
+				pilote->carte.matrice[pilote->coordy][pilote->coordx+5] == '#') {
 
 		pilote->accX++;
 	}
 
-	else if(pilote->carte.matrice[pilote->coordy+2][pilote->coordx] == '#') {
+	else if(pilote->coordy+5 <= pilote->carte.tailleY && 
+				pilote->carte.matrice[pilote->coordy+5][pilote->coordx] == '#') {
 
 		pilote->accY++;
 	}
@@ -164,28 +165,31 @@ void depart_pilote(Pilote *pilote)
 
 //############################################################################
 
-char *rouler_pilote(Pilote *pilote) {
+void rouler_pilote(Pilote *pilote) {
 
 	char action[10];
 
 	//Si la direction précedente est toujours bonne
-	if(pilote->carte.matrice[pilote->coordy + pilote->accY][pilote->coordx + pilote->accX])
+	if(pilote->carte.matrice[pilote->coordy + pilote->velY][pilote->coordx + pilote->velX])
 	{
+		//Si la voiture peut encore accelerer en "hauteur"
 		if(-5 < pilote->velY && pilote->velY < 5)
 		{
-			if(pilote->accY<0)
-				pilote->velY += pilote->accY;
-			else
-				pilote->velY += pilote->accY;
+			pilote->velY += pilote->accY;
 		}
-		
+		else
+		{
+			pilote->accY = 0;
+		}
 
-		//Mise à jour des données
-		pilote->velX += pilote->accX;
-
-		action[0] = pilote->accX;
-		action[1] = pilote->accY;
-
-		return action;
+		//Si la voiture peut encore accelerer en "largeur"
+		if(-5 < pilote->velX && pilote->velX < 5)
+		{
+			pilote->velX += pilote->accX;
+		}
+		else
+		{
+			pilote->accX = 0;
+		}
 	}
 }

@@ -112,7 +112,7 @@ int determination_direction(Pilote *pilote);
  * @param pilote 
  * @return : les informations à envoyer au serveur
  */
-char *rouler_pilote(Pilote *pilote);
+void rouler_pilote(Pilote *pilote);
 
 /**
  * @brief  depense du carburant à un instant t

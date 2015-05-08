@@ -17,8 +17,7 @@
  */
 int main(int argc, char const *argv[]) {
 
-	//Déclaration de l'instruction à envoyer au serveur
-	char *action = (char*) malloc(10*sizeof(char));
+FILE *info = fopen("ici.txt", "w+");
 
 	//Construction du pilote
 	Pilote pilote = construire_pilote(stdin);
@@ -26,15 +25,15 @@ int main(int argc, char const *argv[]) {
 	//Situation du pilote et de ses concurrents
 	emplacement_pilote(&pilote, stdin);
 
+	fprintf(info, "%d\n", pilote.coordx);
+	
 	//Determination de la direction lors du départ
 	depart_pilote(&pilote);
 
 	//Instruction pour le serveur
-	sprintf(action,"%d %d",pilote.accX, pilote.accY);
-
 	pilote.carte.carburant += deltaCarburantAcceleration(pilote.accX, pilote.accY, pilote.velX, pilote.velY, 0);
 
-	fprintf(stdout, "%s\n", action);
+	fprintf(stdout, "%d %d\n", pilote.accX, pilote.accY);
 
 	// Vidage du buffer nécessaire.
 	fflush(stdout);
@@ -46,17 +45,17 @@ int main(int argc, char const *argv[]) {
 		emplacement_pilote(&pilote, stdin);
 
 		//Le pilote se déplace
-		action = rouler_pilote(&pilote);
+		rouler_pilote(&pilote);
 	
 		//Instruction pour le serveur
 		pilote.carte.carburant += deltaCarburantAcceleration(pilote.accX, pilote.accY, pilote.velX, pilote.velY, 0);
 
-		fprintf(stdout, "%d %d\n",action[0], action[1]);
+		fprintf(stdout, "%d %d\n", pilote.accX, pilote.accY);
 
 		// Vidage du buffer nécessaire.
 		fflush(stdout);
 	}
-	
+	fclose(info);
 	//Destruction du pilote
 	detruire_pilote(&pilote);
 	
