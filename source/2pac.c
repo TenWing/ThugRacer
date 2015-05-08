@@ -17,10 +17,19 @@
  */
 int main(int argc, char const *argv[]) {
 
-	char c;
+	char action[2] = {0,1};
 	Pilote pilote = construire_pilote(stdin);
 
-	emplacement_pilote(&pilote, stdin);
+	while(!feof(stdin)) {
+		emplacement_pilote(&pilote, stdin);
+
+	
+
+	fprintf(stdout, "%s\n", depart_pilote(&pilote));
+
+	fflush(stdout); // Vidage du buffer nécessaire.
+	}
+	
 
 	detruire_pilote(&pilote);
 	

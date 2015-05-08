@@ -30,6 +30,16 @@
 
 //############################################################################
 
+int deltaCarburantAcceleration(int accX, int accY, int velX, int velY, int dansSable)
+{
+	int valeur = accX*accX + accY*accY;
+	valeur += (int)(sqrt(velX*velX+velY*velY)*3.0/2.0);
+	if (dansSable) valeur += 1;
+	return -valeur;
+}
+
+//############################################################################
+
 Pilote construire_pilote(FILE *fichier) {
 
 	Pilote pilote;
@@ -70,7 +80,7 @@ void emplacement_pilote(Pilote *pilote, FILE *fichier) {
 			//On la détermine
 			entier[j] = determination_position(essai, i-1);
 
-			//On réinitialise pour la prochaine coordonée
+			//On réinitialise pour la prochaine coordonnée
 			j++;
 			i=-1;
 		}
@@ -85,6 +95,15 @@ void emplacement_pilote(Pilote *pilote, FILE *fichier) {
 	pilote->coordy = entier[1];
 	pilote->carte.matrice[entier[2]][entier[3]] = '*';
 	pilote->carte.matrice[entier[4]][entier[5]] = '*';
+
+	FILE* info = fopen("ici2.txt","w+"); // Pour le débuggage
+	fprintf(info," === >bug< === \n");
+	fprintf(info, "%d\n", pilote->coordx);
+	fprintf(info, "%d\n", pilote->coordy);
+
+	if(pilote->carte.matrice[64][6] == '.')
+		fprintf(info, "caca\n" );
+	fclose(info);
 
 
 }
@@ -117,13 +136,50 @@ int determination_position(char *tab, int debut) {
 
 int determination_direction(Pilote *pilote) {
 
+
+
 }
 
 //############################################################################
 
 char* depart_pilote(Pilote *pilote)
 {
-	return NULL;
+	char action[10];
+
+	if(pilote->carte.matrice[pilote->coordx][pilote->coordy-2] == '#') {
+
+		pilote->accY--;
+	}
+
+	if(pilote->carte.matrice[pilote->coordx][pilote->coordy+2] == '#') {
+
+		pilote->accY++;
+	}
+
+	if(pilote->carte.matrice[pilote->coordx+2][pilote->coordy] == '#') {
+
+		pilote->accX++;
+	}
+
+	if(pilote->carte.matrice[pilote->coordx-2][pilote->coordy] == '#') {
+
+		pilote->accX--;
+	}
+
+	pilote->velX += pilote->accX;
+	pilote->velY += pilote->accY;
+
+	FILE* info = fopen("ici.txt","w+"); // Pour le débuggage
+	fprintf(info," === >bug< === \n");
+	fprintf(info, "%d\n", pilote->coordx);
+	fprintf(info, "%d\n", pilote->coordy);
+
+	if(pilote->carte.matrice[62][7] == '#')
+		fprintf(info, "%d\n", pilote->accY );
+	fclose(info);
+	sprintf(action,"%d %d",pilote->accX, pilote->accY);
+
+	return action;
 	
 }
 
@@ -133,59 +189,3 @@ char *avancer_pilote(Pilote *pilote) {
 	return NULL;
 
 }
-
-
-
-
-int deltaCarburantAcceleration(int accX, int accY, int velX, int velY, int dansSable)
-{
-	int valeur = accX*accX + accY*accY;
-	valeur += (int)(sqrt(velX*velX+velY*velY)*3.0/2.0);
-	if (dansSable) valeur += 1;
-	return -valeur;
-}
-/*
-	//Variables pour la lecture du fichier et stockage des caractères dans un tableau
-	char c, essai[30];
-
-	//Variables pour les boucles
-	int i=0,j,k,l;
-
-	//Variable pour la multiplication et pour la tranposition char <=> int
-	int h, permu;
-
-	//Lecture et stockage du fichier
-	while(fread(&c, sizeof(char), 1, fichier)==1 && c!='\t')
-	{
-		essai[i] = c;
-
-		//Stockage de la séparation des deux coordonées
-		if(c == ' ')
-			l=i;
-
-		i++;
-	} 
-
-	//On isole dans la première boucle pour trouver l'abscisse
-	for(k=l-1; k>=0; k--)
-	{
-		permu = essai[k];
-
-		pilote->coordx = pilote->coordx + (permu-48)*h;
-		h=h*10;
-
-	}
-
-	//réinitialiser pour la multiplication
-	h = 1;
-	
-	//Meme opération pour trouver l'ordonnée
-	for(k=i-1; k>l; k--)
-	{
-		permu = essai[k];
-
-		pilote->coordy = pilote->coordy + (permu-48)*h;
-		h=h*10;
-
-	}
-*/

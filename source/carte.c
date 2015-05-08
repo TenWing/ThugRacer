@@ -46,7 +46,7 @@ void detruire_carte(Carte* carte)
 }
 
 Carte charge_carte(FILE* fichier)
-{
+{	
 	Carte carte;
 	int tx, ty, carbu, i, j=0;
 	char c;
@@ -64,7 +64,8 @@ Carte charge_carte(FILE* fichier)
 			carte.matrice[i][j] = c;
 			j++;
 		}
+		j=0;
 	}
-
+	
 	return carte;
 }
