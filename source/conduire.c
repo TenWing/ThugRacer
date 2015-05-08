@@ -170,7 +170,7 @@ void rouler_pilote(Pilote *pilote) {
 	char action[10];
 
 	//Si la direction précedente est toujours bonne
-	if(pilote->carte.matrice[pilote->coordy + pilote->velY][pilote->coordx + pilote->velX])
+	if(pilote->carte.matrice[pilote->coordy + pilote->velY][pilote->coordx + pilote->velX] == '#')
 	{
 		//Si la voiture peut encore accelerer en "hauteur"
 		if(-5 < pilote->velY && pilote->velY < 5)
