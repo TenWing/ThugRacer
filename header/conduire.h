@@ -99,7 +99,7 @@ int determination_position(char *tab, int debut);
  * @param pilote 
  * @return la position au serveur
  */
-char* depart_pilote(Pilote *pilote);
+void depart_pilote(Pilote *pilote);
 
 /**
  * @brief  determine dans quelle direction doit aller le pilote

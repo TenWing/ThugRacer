@@ -96,16 +96,6 @@ void emplacement_pilote(Pilote *pilote, FILE *fichier) {
 	pilote->carte.matrice[entier[2]][entier[3]] = '*';
 	pilote->carte.matrice[entier[4]][entier[5]] = '*';
 
-	FILE* info = fopen("ici2.txt","w+"); // Pour le débuggage
-	fprintf(info," === >bug< === \n");
-	fprintf(info, "%d\n", pilote->coordx);
-	fprintf(info, "%d\n", pilote->coordy);
-
-	if(pilote->carte.matrice[64][6] == '.')
-		fprintf(info, "caca\n" );
-	fclose(info);
-
-
 }
 
 int determination_position(char *tab, int debut) {
@@ -142,44 +132,32 @@ int determination_direction(Pilote *pilote) {
 
 //############################################################################
 
-char* depart_pilote(Pilote *pilote)
+void depart_pilote(Pilote *pilote)
 {
 	char action[10];
 
-	if(pilote->carte.matrice[pilote->coordx][pilote->coordy-2] == '#') {
+	if(pilote->carte.matrice[pilote->coordy-2][pilote->coordx] == '#') {
 
 		pilote->accY--;
 	}
 
-	if(pilote->carte.matrice[pilote->coordx][pilote->coordy+2] == '#') {
-
-		pilote->accY++;
-	}
-
-	if(pilote->carte.matrice[pilote->coordx+2][pilote->coordy] == '#') {
+	if(pilote->carte.matrice[pilote->coordy][pilote->coordx+2] == '#') {
 
 		pilote->accX++;
 	}
 
-	if(pilote->carte.matrice[pilote->coordx-2][pilote->coordy] == '#') {
+	if(pilote->carte.matrice[pilote->coordy+2][pilote->coordx] == '#') {
+
+		pilote->accY++;
+	}
+
+	if(pilote->carte.matrice[pilote->coordy][pilote->coordx-2] == '#') {
 
 		pilote->accX--;
 	}
 
 	pilote->velX += pilote->accX;
 	pilote->velY += pilote->accY;
-
-	FILE* info = fopen("ici.txt","w+"); // Pour le débuggage
-	fprintf(info," === >bug< === \n");
-	fprintf(info, "%d\n", pilote->coordx);
-	fprintf(info, "%d\n", pilote->coordy);
-
-	if(pilote->carte.matrice[62][7] == '#')
-		fprintf(info, "%d\n", pilote->accY );
-	fclose(info);
-	sprintf(action,"%d %d",pilote->accX, pilote->accY);
-
-	return action;
 	
 }
 

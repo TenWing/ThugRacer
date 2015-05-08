@@ -17,15 +17,20 @@
  */
 int main(int argc, char const *argv[]) {
 
-	char action[2] = {0,1};
+	char action[10];
+
 	Pilote pilote = construire_pilote(stdin);
 
 	while(!feof(stdin)) {
 		emplacement_pilote(&pilote, stdin);
 
-	
+	depart_pilote(&pilote);
 
-	fprintf(stdout, "%s\n", depart_pilote(&pilote));
+	sprintf(action,"%d %d",pilote.accX, pilote.accY);
+
+	pilote.carte.carburant += deltaCarburantAcceleration(pilote.accX, pilote.accY, pilote.velX, pilote.velY, 0);
+
+	fprintf(stdout, "%s\n", action);
 
 	fflush(stdout); // Vidage du buffer nécessaire.
 	}
