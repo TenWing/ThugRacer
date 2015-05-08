@@ -108,11 +108,11 @@ void depart_pilote(Pilote *pilote);
  */
 int determination_direction(Pilote *pilote);
 /**
- * fait avancer le pilote en ligne droite
+ * @brief fonction principal du pilote
  * @param pilote 
  * @return : les informations à envoyer au serveur
  */
-char *avancer_pilote(Pilote *pilote);
+char *rouler_pilote(Pilote *pilote);
 
 /**
  * @brief  depense du carburant à un instant t

@@ -64,9 +64,9 @@ void detruire_pilote(Pilote *pilote) {
 void emplacement_pilote(Pilote *pilote, FILE *fichier) {
 	
 	//Variables pour la lecture du fichier et stockage des caractères dans un tableau
-	char c, essai[30],tab[10];
+	char c, essai[30];
 
-	int entier[6],i=0,j=0,k=0;
+	int entier[6],i=0,j=0;
 
 	//Lecture et stockage du fichier
 	while(fread(&c, sizeof(char), 1, fichier)==1 && c != '\n')
@@ -93,8 +93,8 @@ void emplacement_pilote(Pilote *pilote, FILE *fichier) {
 
 	pilote->coordx = entier[0];
 	pilote->coordy = entier[1];
-	pilote->carte.matrice[entier[2]][entier[3]] = '*';
-	pilote->carte.matrice[entier[4]][entier[5]] = '*';
+	pilote->carte.matrice[entier[3]][entier[2]] = '*';
+	pilote->carte.matrice[entier[5]][entier[4]] = '*';
 
 }
 
@@ -134,28 +134,29 @@ int determination_direction(Pilote *pilote) {
 
 void depart_pilote(Pilote *pilote)
 {
-	char action[10];
-
+	//Ceci sont différents tests pour savoir dans quel sens partir
+	//écart de 2 car les pilotes sont séparés par un # sur la ligne de départ
 	if(pilote->carte.matrice[pilote->coordy-2][pilote->coordx] == '#') {
 
 		pilote->accY--;
 	}
 
-	if(pilote->carte.matrice[pilote->coordy][pilote->coordx+2] == '#') {
+	else if(pilote->carte.matrice[pilote->coordy][pilote->coordx+2] == '#') {
 
 		pilote->accX++;
 	}
 
-	if(pilote->carte.matrice[pilote->coordy+2][pilote->coordx] == '#') {
+	else if(pilote->carte.matrice[pilote->coordy+2][pilote->coordx] == '#') {
 
 		pilote->accY++;
 	}
 
-	if(pilote->carte.matrice[pilote->coordy][pilote->coordx-2] == '#') {
+	else {
 
 		pilote->accX--;
 	}
 
+	//Mise à jour des données
 	pilote->velX += pilote->accX;
 	pilote->velY += pilote->accY;
 	
@@ -163,7 +164,28 @@ void depart_pilote(Pilote *pilote)
 
 //############################################################################
 
-char *avancer_pilote(Pilote *pilote) {
-	return NULL;
+char *rouler_pilote(Pilote *pilote) {
 
+	char action[10];
+
+	//Si la direction précedente est toujours bonne
+	if(pilote->carte.matrice[pilote->coordy + pilote->accY][pilote->coordx + pilote->accX])
+	{
+		if(-5 < pilote->velY && pilote->velY < 5)
+		{
+			if(pilote->accY<0)
+				pilote->velY += pilote->accY;
+			else
+				pilote->velY += pilote->accY;
+		}
+		
+
+		//Mise à jour des données
+		pilote->velX += pilote->accX;
+
+		action[0] = pilote->accX;
+		action[1] = pilote->accY;
+
+		return action;
+	}
 }

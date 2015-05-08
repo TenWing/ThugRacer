@@ -17,25 +17,47 @@
  */
 int main(int argc, char const *argv[]) {
 
-	char action[10];
+	//Déclaration de l'instruction à envoyer au serveur
+	char *action = (char*) malloc(10*sizeof(char));
 
+	//Construction du pilote
 	Pilote pilote = construire_pilote(stdin);
 
-	while(!feof(stdin)) {
-		emplacement_pilote(&pilote, stdin);
+	//Situation du pilote et de ses concurrents
+	emplacement_pilote(&pilote, stdin);
 
+	//Determination de la direction lors du départ
 	depart_pilote(&pilote);
 
+	//Instruction pour le serveur
 	sprintf(action,"%d %d",pilote.accX, pilote.accY);
 
 	pilote.carte.carburant += deltaCarburantAcceleration(pilote.accX, pilote.accY, pilote.velX, pilote.velY, 0);
 
 	fprintf(stdout, "%s\n", action);
 
-	fflush(stdout); // Vidage du buffer nécessaire.
+	// Vidage du buffer nécessaire.
+	fflush(stdout);
+
+	//Debut de la course
+	while(!feof(stdin)) {
+	
+		//Situation du pilote et de ses concurrents
+		emplacement_pilote(&pilote, stdin);
+
+		//Le pilote se déplace
+		action = rouler_pilote(&pilote);
+	
+		//Instruction pour le serveur
+		pilote.carte.carburant += deltaCarburantAcceleration(pilote.accX, pilote.accY, pilote.velX, pilote.velY, 0);
+
+		fprintf(stdout, "%d %d\n",action[0], action[1]);
+
+		// Vidage du buffer nécessaire.
+		fflush(stdout);
 	}
 	
-
+	//Destruction du pilote
 	detruire_pilote(&pilote);
 	
 	return EXIT_SUCCESS;
