@@ -7,6 +7,8 @@
 #ifndef CARTE_H
 #define CARTE_H
 
+#include <stdio.h>
+
 /**
  * @brief	La carte du jeu, correspond à la piste de course
  */

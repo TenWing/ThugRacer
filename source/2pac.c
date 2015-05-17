@@ -17,7 +17,7 @@
  */
 int main(int argc, char const *argv[]) {
 
-FILE *info = fopen("ici.txt", "w+");
+FILE *info = fopen("ici.txt", "w");
 
 	//Construction du pilote
 	Pilote pilote = construire_pilote(stdin);
@@ -55,6 +55,7 @@ FILE *info = fopen("ici.txt", "w+");
 		// Vidage du buffer nécessaire.
 		fflush(stdout);
 	}
+	
 	fclose(info);
 	//Destruction du pilote
 	detruire_pilote(&pilote);
