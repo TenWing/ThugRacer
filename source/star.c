@@ -24,15 +24,16 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 	Noeud* toStore = NULL;
 	Noeud* path = NULL;
 	Noeud* toInit = NULL;
+	Noeud* ending = NULL;
 	Noeud node, arrivee;
 	Coordonnee coordonnee, coordInit;
 
 	star.openList = construire_liste(carte.tailleX*carte.tailleY);
-	star.noeuds = malloc(carte.tailleX * sizeof(Noeud**));
+	star.noeuds = calloc(carte.tailleX, sizeof(Noeud**));
 
 	for(i = 0; i < carte.tailleX; i++)
 	{
-		star.noeuds[i] = malloc(carte.tailleY * sizeof(Noeud*));
+		star.noeuds[i] = calloc(carte.tailleY, sizeof(Noeud*));
 	}
 
 	// Initialisation ajout du noeud de départ
@@ -48,18 +49,20 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 	*toInit = arrivee;
 
 	star.noeuds[fin.x][fin.y] = toInit;
-
+	ending = star.noeuds[fin.x][fin.y];
+	
 	// Arrêt quand chemin trouvé ou PAS de chemin
-	while(arrivee.etat != CLOSE || star.openList.quantite == 0)
+	while(ending->etat != CLOSE && star.openList.quantite != 0)
 	{
 		//Recupération du noeud le plus intéressant
 		coordonnee = star.openList.coordonnees[star.openList.ids[0]];
 		toStore = star.noeuds[coordonnee.x][coordonnee.y];
+	
 		supprimer_sommet(&(star.openList));
-
+		
 		//Changement de son état
 		toStore->etat = CLOSE;
-
+				
 		// Scan des 8 cases autour
 		for(i = coordonnee.x - 1; i <= coordonnee.x + 1; i++)
 		{
@@ -77,16 +80,20 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 						*toInit = node;
 						star.noeuds[i][j] = toInit;
 					}
-
+					
 					// Si case praticable
 					if(carte.matrice[i][j] != '.' && star.noeuds[i][j]->etat != CLOSE)
 					{
 						// Si pas dans open list on l'ajoute
-						if(!star.noeuds[i][j]->etat == OPEN)
+						if(star.noeuds[i][j]->etat == UNTREATED)
 						{
 							// Le père est la case actuellement traitée
 							star.noeuds[i][j]->parent = toStore;
-							ajouter(&(star.openList), star.noeuds[i][j]);
+							star.noeuds[i][j]->etat = OPEN;
+
+							// fprintf(info, "%d %d %c %d\n", i, j, carte.matrice[i][j], star.noeuds[i][j]->etat);
+
+							ajouter(&(star.openList), star.noeuds[i][j]); 
 						}
 						// Sinon on regarde si on a trouvé un meilleur chemin jusqu'à cette case
 						else
@@ -105,6 +112,8 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 		}
 	}
 
+	FILE* info = fopen("star.txt", "w");
+
 	// Cas chemin trouvé
 	if(star.openList.quantite > 0)
 	{
@@ -119,19 +128,19 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 			oldPathPoint->suivant = NULL;
 			path = path->parent;
 		}
-		else
+
+		while(path!= NULL)
 		{
-			while(path!= NULL)
-			{
-				pathPoint = (Trajectoire*) malloc(sizeof(Trajectoire));
-				pathPoint->coordonnees = path->coordonnees;
-				pathPoint->precedent = oldPathPoint;
-				oldPathPoint->suivant = pathPoint;
-				oldPathPoint = pathPoint;
-				path = path->parent;
-			}
+			pathPoint = (Trajectoire*) malloc(sizeof(Trajectoire));
+			pathPoint->coordonnees = path->coordonnees;
+			pathPoint->suivant = oldPathPoint;
+			oldPathPoint->precedent = pathPoint;
+			oldPathPoint = pathPoint;
+			path = path->parent;
 		}		
 	}
+
+	fclose(info);
 
 	return pathPoint;
 }

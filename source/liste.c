@@ -25,7 +25,7 @@ Liste construire_liste(int tailleMax)
 
 	liste.ids = calloc(tailleMax, sizeof(int));
 	liste.coutF = calloc(tailleMax, sizeof(int));
-	liste.coordonnees = calloc(tailleMax, sizeof(int));
+	liste.coordonnees = calloc(tailleMax, sizeof(Coordonnee));
 
 	return liste;
 }
@@ -37,8 +37,6 @@ void ajouter(Liste* liste, Noeud* noeud)
 	// Ajout à la fin
 	liste->ids[liste->quantite] = liste->idCourant;
 	noeud->idOpen = liste->idCourant;
-	liste->idCourant++;
-	liste->quantite++;
 
 	// Ajout des valeurs dans les autres listes
 	liste->coutF[liste->idCourant] = noeud->G + noeud->H;
@@ -46,46 +44,51 @@ void ajouter(Liste* liste, Noeud* noeud)
 
 	// On boucle tant que le rangement est pas fini
 	currentPosition = liste->quantite;
-	while(liste->coutF[liste->ids[currentPosition]] < liste->coutF[liste->ids[currentPosition/2]]
-			|| currentPosition != 0)
+	while(liste->coutF[liste->idCourant] < liste->coutF[liste->ids[currentPosition/2]]
+			&& currentPosition != 0)
 	{
 		// On échange les identifiants
 		tmp = liste->ids[currentPosition/2];
-		liste->ids[currentPosition/2] = liste->quantite;
+		liste->ids[currentPosition/2] = liste->idCourant;
 		liste->ids[currentPosition] = tmp;
 
 		// On continue de regarder mais cette fois pour le noeud parent
 		currentPosition /= 2;
 	}
+
+	liste->quantite++;
+	liste->idCourant++;
 }
 
 void supprimer_sommet(Liste* liste)
 {
 	if(liste->quantite <= 0)
+	{
 		return;
+	}
 
 	int currentPosition, tmp;
 
-	liste->ids[0] = liste->ids[liste->quantite];
+	liste->ids[0] = liste->ids[liste->quantite - 1];
 	liste->quantite--;
 
-	currentPosition = 0;
-	while(liste->coutF[liste->ids[currentPosition]] > liste->coutF[liste->ids[currentPosition*2]]
-			|| liste->coutF[liste->ids[currentPosition]] > liste->coutF[liste->ids[currentPosition*2+1]]
-			|| currentPosition != 0)
+	currentPosition = 1;
+	while((liste->coutF[liste->ids[currentPosition-1]] > liste->coutF[liste->ids[currentPosition*2-1]]
+			|| liste->coutF[liste->ids[currentPosition-1]] > liste->coutF[liste->ids[currentPosition*2]])
+			&& currentPosition-1 < liste->quantite)
 	{
-		if(liste->coutF[liste->ids[currentPosition*2+1]] > liste->coutF[liste->ids[currentPosition*2]])
+		if(liste->coutF[liste->ids[currentPosition*2]] > liste->coutF[liste->ids[currentPosition*2-1]])
 		{
-			tmp = liste->ids[currentPosition];
-			liste->ids[currentPosition] = liste->ids[currentPosition*2];
-			liste->ids[currentPosition*2] = tmp;
+			tmp = liste->ids[currentPosition-1];
+			liste->ids[currentPosition-1] = liste->ids[currentPosition*2-1];
+			liste->ids[currentPosition*2-1] = tmp;
 			currentPosition *= 2;
 		}
 		else
 		{
-			tmp = liste->ids[currentPosition];
-			liste->ids[currentPosition] = liste->ids[currentPosition*2+1];
-			liste->ids[currentPosition*2+1] = tmp;
+			tmp = liste->ids[currentPosition-1];
+			liste->ids[currentPosition-1] = liste->ids[currentPosition*2];
+			liste->ids[currentPosition*2] = tmp;
 			currentPosition *= 2;
 			currentPosition++;
 		}
@@ -107,7 +110,7 @@ void mise_a_jour(Liste* liste, int id, int newF)
 
 	// On boucle tant que le rangement est pas fini
 	while(liste->coutF[id] < liste->coutF[liste->ids[index/2]]
-			|| index != 0)
+			&& index != 0)
 	{
 		// On échange les identifiants
 		tmp = liste->ids[index/2];
@@ -117,4 +120,16 @@ void mise_a_jour(Liste* liste, int id, int newF)
 		// On continue de regarder mais cette fois pour le noeud parent
 		index /= 2;
 	}
+}
+
+void affiche_liste(Liste* liste, FILE* output)
+{
+	int i = 0;
+
+	fprintf(output, "|%d| ", liste->quantite);
+	for(i = 0; i < liste->quantite; i++)
+	{
+		fprintf(output, "%d ", liste->ids[i]);
+	}
+	fprintf(output, "\n");
 }

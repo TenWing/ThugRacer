@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <conduire.h>
+#include <star.h>
 
 /**
  * [main description]
@@ -27,6 +28,20 @@ FILE *info = fopen("ici.txt", "w");
 
 	fprintf(info, "%d\n", pilote.coordx);
 	
+	Coordonnee dep; dep.x = pilote.coordx; dep.y = pilote.coordy;
+	Coordonnee end; end.x = 24; end.y = 18;
+
+	Trajectoire* ptr = NULL;
+	Trajectoire* trajectoire = trouver_chemin(dep, end, pilote.carte);
+	ptr = trajectoire;
+
+	while(ptr != NULL)
+	{
+		fprintf(info, "%d %d\n", ptr->coordonnees.x, ptr->coordonnees.y);
+		ptr = ptr->suivant;
+	}
+
+	/*
 	//Determination de la direction lors du départ
 	depart_pilote(&pilote);
 
@@ -55,7 +70,7 @@ FILE *info = fopen("ici.txt", "w");
 		// Vidage du buffer nécessaire.
 		fflush(stdout);
 	}
-	
+	*/
 	fclose(info);
 	//Destruction du pilote
 	detruire_pilote(&pilote);

@@ -20,13 +20,13 @@ Carte construit_carte(int tailleX, int tailleY, int carburant)
 	carte.carburant = carburant;
 
 	// Allocation de la zone mémoire pour les colonnes
-	carte.matrice = (char**) malloc(sizeof(char*)*tailleY);
+	carte.matrice = (char**) malloc(sizeof(char*)*tailleX);
 
 	// Création et parcours de chaque pointeur
-	for(i = 0; i < tailleY; i++)
+	for(i = 0; i < tailleX; i++)
 	{
 		// Allocation de la zone mémoire pour les lignes
-		carte.matrice[i] = (char*) malloc(sizeof(char)*tailleX);
+		carte.matrice[i] = (char*) malloc(sizeof(char)*tailleY);
 	}
 
 	return carte;
@@ -60,12 +60,13 @@ Carte charge_carte(FILE* fichier)
 	// Parcours de chaque ligne du circuit
 	for (i = 0; i < ty; i++)
 	{
-		while(fread(&c, sizeof(char), 1, fichier)==1 && c!='\n') {
-			carte.matrice[i][j] = c;
+		while(fread(&c, sizeof(char), 1, fichier)==1 && c!='\n')
+		{
+			carte.matrice[j][i] = c;
 			j++;
 		}
 		j=0;
 	}
-	
+
 	return carte;
 }

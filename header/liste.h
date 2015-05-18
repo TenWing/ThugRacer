@@ -81,4 +81,6 @@ void supprimer_sommet(Liste* liste);
  */
 void mise_a_jour(Liste* liste, int id, int newF);
 
+void affiche_liste(Liste* liste, FILE* output);
+
 #endif
