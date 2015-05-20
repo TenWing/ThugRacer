@@ -29,11 +29,14 @@ FILE *info = fopen("ici.txt", "w");
 	fprintf(info, "%d\n", pilote.coordx);
 	
 	Coordonnee dep; dep.x = pilote.coordx; dep.y = pilote.coordy;
-	Coordonnee end; end.x = 24; end.y = 18;
+	Coordonnee end; end.x = 85; end.y = 60;
 
 	Trajectoire* ptr = NULL;
 	Trajectoire* trajectoire = trouver_chemin(dep, end, pilote.carte);
 	ptr = trajectoire;
+
+	if(!ptr)
+		fprintf(info, "NON T_T\n");
 
 	while(ptr != NULL)
 	{

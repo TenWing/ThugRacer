@@ -51,10 +51,13 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 	star.noeuds[fin.x][fin.y] = toInit;
 	ending = star.noeuds[fin.x][fin.y];
 	
+	// FILE* info = fopen("star.txt", "w");
+
 	// Arrêt quand chemin trouvé ou PAS de chemin
 	while(ending->etat != CLOSE && star.openList.quantite != 0)
 	{
 		//Recupération du noeud le plus intéressant
+		//affiche_liste(&(star.openList), info);
 		coordonnee = star.openList.coordonnees[star.openList.ids[0]];
 		toStore = star.noeuds[coordonnee.x][coordonnee.y];
 	
@@ -112,8 +115,6 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 		}
 	}
 
-	FILE* info = fopen("star.txt", "w");
-
 	// Cas chemin trouvé
 	if(star.openList.quantite > 0)
 	{
@@ -140,7 +141,8 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 		}		
 	}
 
-	fclose(info);
+
+	// fclose(info);
 
 	return pathPoint;
 }
