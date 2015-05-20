@@ -67,7 +67,6 @@ typedef struct Pilote
 	 */
 	Carte carte;
 
-
 }Pilote;
 
 //###########################################################################
@@ -93,6 +92,13 @@ void detruire_pilote(Pilote *pilote);
  * @param fichier : le flux d'entrée
  */
 void emplacement_pilote(Pilote *pilote, FILE *fichier);
+
+/** 
+ * @brief  détermine la position du pilote
+ * @param  tab   le tableau ou figure les postiions à remettre en ordre
+ * @param  debut indice du tableau
+ * @return  la position
+ */
 int determination_position(char *tab, int debut);
 /**
  * @brief permet au pilote de partir au départ

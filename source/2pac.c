@@ -18,7 +18,9 @@
  */
 int main(int argc, char const *argv[]) {
 
-FILE *info = fopen("ici.txt", "w");
+	int i,j;
+	
+	FILE *info = fopen("ici.txt", "w");
 
 	//Construction du pilote
 	Pilote pilote = construire_pilote(stdin);

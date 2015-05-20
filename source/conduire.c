@@ -48,6 +48,8 @@ Pilote construire_pilote(FILE *fichier) {
 
 	pilote.accX = pilote.accY = pilote.velX = pilote.velY = pilote.coordx = pilote.coordy = 0;
 
+
+
 	return pilote;
 
 }
