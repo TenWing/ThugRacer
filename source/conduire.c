@@ -21,6 +21,7 @@
 #include <carte.h>
 #include <conduire.h>
 #include <math.h>
+#include <star.h>
 
 /**
  * @file conduire.
@@ -167,39 +168,9 @@ void depart_pilote(Pilote *pilote)
 
 //############################################################################
 
-void rouler_pilote(Pilote *pilote) {
+void rouler_pilote(Pilote *pilote, Trajectoire *trajectoire) {
 
-	//Si la direction précedente est toujours bonne
-	if(pilote->carte.matrice[pilote->coordy + pilote->velY][pilote->coordx + pilote->velX] == '#')
-	{
-		//Si la voiture peut encore accelerer en "hauteur"
-		if(-5 < pilote->velY && pilote->velY < 5)
-		{
-			pilote->velY += pilote->accY;
-		}
-		else
-		{
-			pilote->accY = 0;
-		}
-
-		//Si la voiture peut encore accelerer en "largeur"
-		if(-5 < pilote->velX && pilote->velX < 5)
-		{
-			pilote->velX += pilote->accX;
-		}
-		else
-		{
-			pilote->accX = 0;
-		}
-	}
+	
 }
 
 //############################################################################
-
-void freiner_pilote(Pilote *pilote) {
-
-}
-
-void touner_droite_pilote(Pilote *pilote) {
-	
-}

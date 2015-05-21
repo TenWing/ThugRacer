@@ -25,6 +25,7 @@
  */
 
 #include <carte.h>
+#include <star.h>
 
 //###########################################################################
 //#####							Definitions								#####
@@ -116,9 +117,10 @@ int determination_direction(Pilote *pilote);
 /**
  * @brief fonction principal du pilote
  * @param pilote 
+ * @param trajectoire : la trajectoire idéale à suivre par le pilote
  * @return : les informations à envoyer au serveur
  */
-void rouler_pilote(Pilote *pilote);
+void rouler_pilote(Pilote *pilote, Trajectoire *trajectoire);
 
 /**
  * @brief  depense du carburant à un instant t
@@ -131,16 +133,5 @@ void rouler_pilote(Pilote *pilote);
  */
 int deltaCarburantAcceleration(int accX, int accY, int velX, int velY, int dansSable);
 
-/**
- * @brief fonction qui permet au pilote de freiner
- * @param pilote 
- */
-void freiner_pilote(Pilote *pilote);
-
-/**
- * @brief le pilote va tourner à droite
- * @param pilote
- */
-void touner_droite_pilote(Pilote *pilote);
 
 #endif

@@ -28,10 +28,39 @@ int main(int argc, char const *argv[]) {
 	//Situation du pilote et de ses concurrents
 	emplacement_pilote(&pilote, stdin);
 
-	fprintf(info, "%d\n", pilote.coordx);
+	Coordonnee dep; 
+	dep.x = pilote.coordx; 
+	dep.y = pilote.coordy;
+	Coordonnee end;
+
+	for(i=0;i<pilote.carte.tailleY;i++)
+	{
+		for(j=0;j<pilote.carte.tailleX;j++)
+		{
+			if(pilote.carte.matrice[j][i] == '=')
+			{
+				end.x = j; 
+				end.y = i;
+
+				j=pilote.carte.tailleX;
+				i=pilote.carte.tailleY;
+			}
+		}
+	}
+
+	Trajectoire* trajectoire = trouver_chemin(dep, end, pilote.carte);
+
+	fclose(info);
+	//Destruction du pilote
+	detruire_pilote(&pilote);
 	
-	Coordonnee dep; dep.x = pilote.coordx; dep.y = pilote.coordy;
-	Coordonnee end; end.x = 85; end.y = 60;
+	return EXIT_SUCCESS;
+}
+
+
+	
+/*
+	fprintf(info, "%d\n", pilote.coordx);
 
 	Trajectoire* ptr = NULL;
 	Trajectoire* trajectoire = trouver_chemin(dep, end, pilote.carte);
@@ -46,7 +75,7 @@ int main(int argc, char const *argv[]) {
 		ptr = ptr->suivant;
 	}
 
-	/*
+	
 	//Determination de la direction lors du départ
 	depart_pilote(&pilote);
 
@@ -76,9 +105,3 @@ int main(int argc, char const *argv[]) {
 		fflush(stdout);
 	}
 	*/
-	fclose(info);
-	//Destruction du pilote
-	detruire_pilote(&pilote);
-	
-	return EXIT_SUCCESS;
-}
