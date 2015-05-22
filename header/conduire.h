@@ -120,8 +120,7 @@ int determination_direction(Pilote *pilote);
  * @param trajectoire : la trajectoire idéale à suivre par le pilote
  * @return : les informations à envoyer au serveur
  */
-void rouler_pilote(Pilote *pilote, Trajectoire *trajectoire);
-
+void rouler_pilote(Pilote *pilote, Coordonnee coordonnee);
 /**
  * @brief  depense du carburant à un instant t
  * @param  accX      acceleration selon l'abscisse
@@ -133,5 +132,5 @@ void rouler_pilote(Pilote *pilote, Trajectoire *trajectoire);
  */
 int deltaCarburantAcceleration(int accX, int accY, int velX, int velY, int dansSable);
 
-
+Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire);
 #endif

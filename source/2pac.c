@@ -18,7 +18,11 @@
  */
 int main(int argc, char const *argv[]) {
 
-	int i,j;
+	int i,j,n=0;
+	Coordonnee dep; 
+	Coordonnee end;
+	Coordonnee coordonnee;
+	Trajectoire* trajectoire = NULL;
 	
 	FILE *info = fopen("ici.txt", "w");
 
@@ -28,29 +32,66 @@ int main(int argc, char const *argv[]) {
 	//Situation du pilote et de ses concurrents
 	emplacement_pilote(&pilote, stdin);
 
-	Coordonnee dep; 
 	dep.x = pilote.coordx; 
 	dep.y = pilote.coordy;
-	Coordonnee end;
 
-	for(i=0;i<pilote.carte.tailleY;i++)
+	for(i=0;i<pilote.carte.tailleX;i++)
 	{
-		for(j=0;j<pilote.carte.tailleX;j++)
+		for(j=0;j<pilote.carte.tailleY;j++)
 		{
-			if(pilote.carte.matrice[j][i] == '=')
+			if(pilote.carte.matrice[i][j] == '=')
 			{
-				end.x = j; 
-				end.y = i;
-
-				j=pilote.carte.tailleX;
-				i=pilote.carte.tailleY;
+				end.x = i; 
+				end.y = j;
 			}
 		}
 	}
 
-	Trajectoire* trajectoire = trouver_chemin(dep, end, pilote.carte);
+	trajectoire = trouver_chemin(dep, end, pilote.carte);
 
+	Trajectoire *ptr = trajectoire;
+
+	if(!ptr)
+		fprintf(info, "NON T_T\n");
+
+	while(ptr != NULL)
+	{
+		fprintf(info, "%d %d\n", ptr->coordonnees.x, ptr->coordonnees.y);
+		ptr = ptr->suivant;
+	}
+
+	ptr = trajectoire;
 	fclose(info);
+
+	//Debut de la course
+	while(n<2000) 
+	{
+		if(n!=0)
+			//Situation du pilote et de ses concurrents
+			emplacement_pilote(&pilote, stdin);
+
+		ptr = ptr->suivant;
+		coordonnee.x = ptr->suivant->coordonnees.x;
+		coordonnee.y = ptr->suivant->coordonnees.y;
+
+		//coordonnee = get_trajectoire_coordonnee(&pilote, trajectoire);
+
+		//Le pilote se déplace
+		rouler_pilote(&pilote,coordonnee);
+	
+		//Instruction pour le serveur
+		pilote.carte.carburant += deltaCarburantAcceleration(pilote.accX, pilote.accY, pilote.velX, pilote.velY, 0);
+
+
+		fprintf(stdout, "%d %d\n", pilote.accX, pilote.accY);
+
+		// Vidage du buffer nécessaire.
+		fflush(stdout);
+
+		n++;
+
+	}
+
 	//Destruction du pilote
 	detruire_pilote(&pilote);
 	
@@ -63,7 +104,6 @@ int main(int argc, char const *argv[]) {
 	fprintf(info, "%d\n", pilote.coordx);
 
 	Trajectoire* ptr = NULL;
-	Trajectoire* trajectoire = trouver_chemin(dep, end, pilote.carte);
 	ptr = trajectoire;
 
 	if(!ptr)

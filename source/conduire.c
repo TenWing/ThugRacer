@@ -138,21 +138,21 @@ int determination_direction(Pilote *pilote) {
 void depart_pilote(Pilote *pilote)
 {
 	//Ceci sont différents tests pour savoir dans quel sens partir
-	if(pilote->coordy-5 >=0 && pilote->carte.matrice[pilote->coordy-5][pilote->coordx] == '#') {
+	if(pilote->coordy-5 >=0 && pilote->carte.matrice[pilote->coordx][pilote->coordy-5] == '#') {
 
 		pilote->accY--;
 	}
 
 	else if(pilote->coordx+5 <= pilote->carte.tailleX && 
-				pilote->carte.matrice[pilote->coordy][pilote->coordx+5] == '#') {
+				pilote->carte.matrice[pilote->coordx][pilote->coordy+5] == '#') {
 
-		pilote->accX++;
+		pilote->accY++;
 	}
 
 	else if(pilote->coordy+5 <= pilote->carte.tailleY && 
-				pilote->carte.matrice[pilote->coordy+5][pilote->coordx] == '#') {
+				pilote->carte.matrice[pilote->coordx+5][pilote->coordy] == '#') {
 
-		pilote->accY++;
+		pilote->accX++;
 	}
 
 	else {
@@ -168,9 +168,91 @@ void depart_pilote(Pilote *pilote)
 
 //############################################################################
 
-void rouler_pilote(Pilote *pilote, Trajectoire *trajectoire) {
+Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire) {
 
+	Trajectoire *actuel = NULL;
+	actuel = trajectoire;
+	Coordonnee output;
+	int trouver=0;
+
+	while(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
+		actuel->coordonnees.y != pilote->coordy + pilote->velY )
+	{
+		actuel = actuel->suivant;
+	}
+
+	if(actuel != NULL)
+	{
+		actuel = actuel->suivant;
+	}
+/*	else
+	{
+		actuel = trajectoire;
+
+		while(trouver == 0)
+		{
+			if((actuel->coordonnees.x != pilote->coordx + pilote->velX -1&& 
+					actuel->coordonnees.y != pilote->coordy + pilote->velY -1)
+				||
+				(actuel->coordonnees.x != pilote->coordx + pilote->velX -1 && 
+						actuel->coordonnees.y != pilote->coordy + pilote->velY)
+				||
+				(actuel->coordonnees.x != pilote->coordx + pilote->velX -1 && 
+						actuel->coordonnees.y != pilote->coordy + pilote->velY +1)
+				||
+				(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
+						actuel->coordonnees.y != pilote->coordy + pilote->velY-1)
+				||
+				(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
+						actuel->coordonnees.y != pilote->coordy + pilote->velY +1)
+				||
+				(actuel->coordonnees.x != pilote->coordx + pilote->velX +1 && 
+						actuel->coordonnees.y != pilote->coordy + pilote->velY -1)
+				||
+				(actuel->coordonnees.x != pilote->coordx + pilote->velX +1&& 
+						actuel->coordonnees.y != pilote->coordy + pilote->velY)
+				||
+				(actuel->coordonnees.x != pilote->coordx + pilote->velX +1 && 
+						actuel->coordonnees.y != pilote->coordy + pilote->velY +1))
+				trouver = 1;
+
+				actuel = actuel ->suivant;
+		}
+	}
+*/
+	output.x = actuel->coordonnees.x;
+	output.y = actuel->coordonnees.y;
+
+	return output;
+}
+
+//############################################################################
+
+void rouler_pilote(Pilote *pilote, Coordonnee coordonnee) {
+
+	int tmp_vitesse_x, tmp_vitesse_y,tmp_acc_x,tmp_acc_y;
+
+	//Coordonnées du vecteur vitesse
+	tmp_vitesse_x = coordonnee.x - pilote->coordx;	
+	tmp_vitesse_y = coordonnee.y - pilote->coordy;	
+
+	//Coordonnées de l'accélération à avoir
+	pilote->accX = tmp_vitesse_x - pilote->velX;
+	pilote->accY = tmp_vitesse_y - pilote->velY;
 	
+	if(pilote->accX == pilote->velX)
+	{
+		pilote->accX =0;
+	}
+	if(pilote->accY == pilote->velY)
+	{
+		pilote->accY =0;
+	}
+	
+	pilote->velX += pilote->accX;
+	pilote->velY += pilote->accY;
+
+
 }
 
 //############################################################################
