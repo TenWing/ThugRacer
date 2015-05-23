@@ -52,15 +52,18 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 	ending = star.noeuds[fin.x][fin.y];
 	
 	// FILE* info = fopen("star.txt", "w");
+	// fprintf(info, "====ARRIVEE=== : %d %d\n", fin.x, fin.y);
 
 	// Arrêt quand chemin trouvé ou PAS de chemin
 	while(ending->etat != CLOSE && star.openList.quantite != 0)
 	{
 		//Recupération du noeud le plus intéressant
-		//affiche_liste(&(star.openList), info);
+		// affiche_liste(&(star.openList), info);
 		coordonnee = star.openList.coordonnees[star.openList.ids[0]];
 		toStore = star.noeuds[coordonnee.x][coordonnee.y];
 	
+		// fprintf(info, "Recherche : %d %d\n", toStore->coordonnees.x, toStore->coordonnees.y);
+
 		supprimer_sommet(&(star.openList));
 		
 		//Changement de son état
@@ -87,6 +90,10 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 					// Si case praticable
 					if(carte.matrice[i][j] != '.' && star.noeuds[i][j]->etat != CLOSE)
 					{
+						// Si c'est du sable ou pas de lapiste on préfère pas passer par là
+						if(carte.matrice[i][j] == '~')
+							star.noeuds[i][j]->P = 1000;
+
 						// Si pas dans open list on l'ajoute
 						if(star.noeuds[i][j]->etat == UNTREATED)
 						{
@@ -102,6 +109,7 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 						else
 						{
 							estimeeG = cout_g(toStore, star.noeuds[i][j]->coordonnees);
+							estimeeG += star.noeuds[i][j]->P;
 							if(estimeeG < star.noeuds[i][j]->G)
 							{
 								star.noeuds[i][j]->parent = toStore;
@@ -145,4 +153,31 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 	// fclose(info);
 
 	return pathPoint;
+}
+
+void afficher_chemin(Trajectoire* chemin, Carte carte, FILE* output)
+{
+	int i = 0, j = 0;
+
+	// Arrêt si pas prêt
+	if(!chemin || !output)
+		return;
+
+	// Ecriture des caractères du chemin dans la carte
+	while(chemin != NULL)
+	{
+		// Ecriture du chemin
+		carte.matrice[chemin->coordonnees.x][chemin->coordonnees.y] = 'T';
+		chemin = chemin->suivant;
+	}
+
+	// Affichage de la carte dans la sortie
+	for(i = 0; i < carte.tailleY; i++)
+	{
+		for(j = 0; j < carte.tailleX; j++)
+		{
+			fprintf(output, "%c", carte.matrice[j][i]);
+		}
+		fprintf(output, "\n");
+	}
 }

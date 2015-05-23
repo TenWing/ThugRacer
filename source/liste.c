@@ -39,7 +39,7 @@ void ajouter(Liste* liste, Noeud* noeud)
 	noeud->idOpen = liste->idCourant;
 
 	// Ajout des valeurs dans les autres listes
-	liste->coutF[liste->idCourant] = noeud->G + noeud->H;
+	liste->coutF[liste->idCourant] = noeud->G + noeud->H + noeud->P;
 	liste->coordonnees[liste->idCourant] = noeud->coordonnees;
 
 	// On boucle tant que le rangement est pas fini
@@ -75,7 +75,7 @@ void supprimer_sommet(Liste* liste)
 	currentPosition = 1;
 	while((liste->coutF[liste->ids[currentPosition-1]] > liste->coutF[liste->ids[currentPosition*2-1]]
 			|| liste->coutF[liste->ids[currentPosition-1]] > liste->coutF[liste->ids[currentPosition*2]])
-			&& currentPosition < liste->quantite && currentPosition*2 < liste->quantite)
+			&& currentPosition < liste->quantite && currentPosition*2-1 < liste->quantite)
 	{
 		if(liste->coutF[liste->ids[currentPosition*2]] > liste->coutF[liste->ids[currentPosition*2-1]])
 		{
@@ -129,7 +129,7 @@ void affiche_liste(Liste* liste, FILE* output)
 	fprintf(output, "|%d| ", liste->quantite);
 	for(i = 0; i < liste->quantite; i++)
 	{
-		fprintf(output, "(%d[%d %d]) ", liste->ids[i], liste->coordonnees[liste->ids[i]].x, liste->coordonnees[liste->ids[i]].y);
+		fprintf(output, "(%d=>%d[%d %d]) ", liste->ids[i], liste->coutF[liste->ids[i]], liste->coordonnees[liste->ids[i]].x, liste->coordonnees[liste->ids[i]].y);
 	}
 	fprintf(output, "\n");
 }

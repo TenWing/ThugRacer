@@ -51,14 +51,7 @@ int main(int argc, char const *argv[]) {
 
 	Trajectoire *ptr = trajectoire;
 
-	if(!ptr)
-		fprintf(info, "NON T_T\n");
-
-	while(ptr != NULL)
-	{
-		fprintf(info, "%d %d\n", ptr->coordonnees.x, ptr->coordonnees.y);
-		ptr = ptr->suivant;
-	}
+	// afficher_chemin(trajectoire, pilote.carte, info);
 
 	ptr = trajectoire;
 	fclose(info);

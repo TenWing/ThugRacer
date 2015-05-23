@@ -42,6 +42,11 @@ struct Noeud
 	int H;
 
 	/**
+	 * @brief le poids de parcours du noeud (+ = pas bien)
+	 */
+	int P;
+
+	/**
 	 * @brief coordonnées du noeud dans la matrice
 	 */
 	Coordonnee coordonnees;

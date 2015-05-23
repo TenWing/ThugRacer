@@ -65,4 +65,12 @@ struct Trajectoire
  */
 Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte);
 
+/**
+ * @brief Affiche le chemin choisi dans un fichier texte
+ * @param chemin le chemin a tracer
+ * @param carte  la carte à sortir
+ * @param output le fichier de sortie
+ */
+void afficher_chemin(Trajectoire* chemin, Carte carte, FILE* output);
+
 #endif

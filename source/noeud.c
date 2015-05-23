@@ -21,6 +21,7 @@ Noeud construire_noeud(int G, int H, Coordonnee coordonnees)
 	noeud.H = H;
 	noeud.coordonnees = coordonnees;
 
+	noeud.P = 0;
 	noeud.parent = NULL;
 	noeud.etat = UNTREATED;
 
