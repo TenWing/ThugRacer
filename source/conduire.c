@@ -175,55 +175,59 @@ Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire) 
 	Coordonnee output;
 	int trouver=0;
 
-	while(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
-		actuel->coordonnees.y != pilote->coordy + pilote->velY )
+	while(actuel != NULL)
 	{
-		actuel = actuel->suivant;
-	}
-
-	if(actuel != NULL)
-	{
-		actuel = actuel->suivant;
-	}
-/*	else
-	{
-		actuel = trajectoire;
-
-		while(trouver == 0)
+		if(actuel->coordonnees.x == pilote->coordx && 
+				actuel->coordonnees.y == pilote->coordy)
 		{
-			if((actuel->coordonnees.x != pilote->coordx + pilote->velX -1&& 
-					actuel->coordonnees.y != pilote->coordy + pilote->velY -1)
-				||
-				(actuel->coordonnees.x != pilote->coordx + pilote->velX -1 && 
-						actuel->coordonnees.y != pilote->coordy + pilote->velY)
-				||
-				(actuel->coordonnees.x != pilote->coordx + pilote->velX -1 && 
-						actuel->coordonnees.y != pilote->coordy + pilote->velY +1)
-				||
-				(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
-						actuel->coordonnees.y != pilote->coordy + pilote->velY-1)
-				||
-				(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
-						actuel->coordonnees.y != pilote->coordy + pilote->velY +1)
-				||
-				(actuel->coordonnees.x != pilote->coordx + pilote->velX +1 && 
-						actuel->coordonnees.y != pilote->coordy + pilote->velY -1)
-				||
-				(actuel->coordonnees.x != pilote->coordx + pilote->velX +1&& 
-						actuel->coordonnees.y != pilote->coordy + pilote->velY)
-				||
-				(actuel->coordonnees.x != pilote->coordx + pilote->velX +1 && 
-						actuel->coordonnees.y != pilote->coordy + pilote->velY +1))
-				trouver = 1;
+			actuel = actuel->suivant;
 
+			output.x = actuel->coordonnees.x;
+			output.y = actuel->coordonnees.y;
+
+			return output;
+		}
+
+		actuel = actuel->suivant;
+	}
+/*
+	actuel = trajectoire;
+
+	while(trouver == 0)
+	{
+		if((actuel->coordonnees.x != pilote->coordx + pilote->velX -1&& 
+				actuel->coordonnees.y != pilote->coordy + pilote->velY -1)
+			||
+			(actuel->coordonnees.x != pilote->coordx + pilote->velX -1 && 
+					actuel->coordonnees.y != pilote->coordy + pilote->velY)
+			||
+			(actuel->coordonnees.x != pilote->coordx + pilote->velX -1 && 
+					actuel->coordonnees.y != pilote->coordy + pilote->velY +1)
+			||
+			(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
+					actuel->coordonnees.y != pilote->coordy + pilote->velY-1)
+			||
+			(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
+					actuel->coordonnees.y != pilote->coordy + pilote->velY +1)
+			||
+			(actuel->coordonnees.x != pilote->coordx + pilote->velX +1 && 
+					actuel->coordonnees.y != pilote->coordy + pilote->velY -1)
+			||
+			(actuel->coordonnees.x != pilote->coordx + pilote->velX +1&& 
+					actuel->coordonnees.y != pilote->coordy + pilote->velY)
+			||
+			(actuel->coordonnees.x != pilote->coordx + pilote->velX +1 && 
+					actuel->coordonnees.y != pilote->coordy + pilote->velY +1))
+			trouver = 1;
 				actuel = actuel ->suivant;
 		}
 	}
-*/
+
 	output.x = actuel->coordonnees.x;
 	output.y = actuel->coordonnees.y;
 
 	return output;
+*/
 }
 
 //############################################################################
@@ -248,7 +252,7 @@ void rouler_pilote(Pilote *pilote, Coordonnee coordonnee) {
 	{
 		pilote->accY =0;
 	}
-	
+
 	pilote->velX += pilote->accX;
 	pilote->velY += pilote->accY;
 

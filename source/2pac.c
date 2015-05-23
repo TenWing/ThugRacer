@@ -63,11 +63,7 @@ int main(int argc, char const *argv[]) {
 			//Situation du pilote et de ses concurrents
 			emplacement_pilote(&pilote, stdin);
 
-		ptr = ptr->suivant;
-		coordonnee.x = ptr->suivant->coordonnees.x;
-		coordonnee.y = ptr->suivant->coordonnees.y;
-
-		//coordonnee = get_trajectoire_coordonnee(&pilote, trajectoire);
+		coordonnee = get_trajectoire_coordonnee(&pilote, trajectoire);
 
 		//Le pilote se déplace
 		rouler_pilote(&pilote,coordonnee);
