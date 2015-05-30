@@ -47,9 +47,9 @@ Pilote construire_pilote(FILE *fichier) {
 
 	pilote.carte = charge_carte(fichier);
 
-	pilote.accX = pilote.accY = pilote.velX = pilote.velY = pilote.coordx = pilote.coordy = 0;
-
-
+	pilote.coordonnee_map.x = pilote.coordonnee_map.y = 0;
+	pilote.coordonnee_acc.x = pilote.coordonnee_acc.y = 0;
+	pilote.coordonnee_vitesse.x = pilote.coordonnee_vitesse.y = 0;
 
 	return pilote;
 
@@ -94,8 +94,12 @@ void emplacement_pilote(Pilote *pilote, FILE *fichier) {
 	//Détermination de la dernière coordonnée
 	entier[j] = determination_position(essai, i-1);
 
-	pilote->coordx = entier[0];
-	pilote->coordy = entier[1];
+	if(pilote->coordonnee_map.x == entier[0] && pilote->coordonnee_map.y == entier[1]) {
+		pilote->coordonnee_vitesse.x = pilote->coordonnee_vitesse.y = 0;
+	}
+
+	pilote->coordonnee_map.x = entier[0];
+	pilote->coordonnee_map.y = entier[1];
 	pilote->carte.matrice[entier[3]][entier[2]] = '*';
 	pilote->carte.matrice[entier[5]][entier[4]] = '*';
 
@@ -127,136 +131,148 @@ int determination_position(char *tab, int debut) {
 
 //############################################################################
 
-int determination_direction(Pilote *pilote) {
-
-
-
+int vecteur_vitesse(int x, int y) {
+	return sqrt(x*x + y*y);
 }
+
+//############################################################################
+
+int distance(Coordonnee pointA, Coordonnee pointB) {
+	return sqrt((pointB.x - pointA.x)*(pointB.x - pointA.x) + (pointB.y - pointA.y)*(pointB.y - pointA.y));
+}
+//############################################################################
 
 //############################################################################
 
 void depart_pilote(Pilote *pilote)
 {
-	//Ceci sont différents tests pour savoir dans quel sens partir
-	if(pilote->coordy-5 >=0 && pilote->carte.matrice[pilote->coordx][pilote->coordy-5] == '#') {
 
-		pilote->accY--;
-	}
-
-	else if(pilote->coordx+5 <= pilote->carte.tailleX && 
-				pilote->carte.matrice[pilote->coordx][pilote->coordy+5] == '#') {
-
-		pilote->accY++;
-	}
-
-	else if(pilote->coordy+5 <= pilote->carte.tailleY && 
-				pilote->carte.matrice[pilote->coordx+5][pilote->coordy] == '#') {
-
-		pilote->accX++;
-	}
-
-	else {
-
-		pilote->accX--;
-	}
-
-	//Mise à jour des données
-	pilote->velX += pilote->accX;
-	pilote->velY += pilote->accY;
-	
 }
 
 //############################################################################
 
-Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire) {
+Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, FILE *inf) {
 
-	Trajectoire *actuel = NULL;
-	actuel = trajectoire;
+	Trajectoire *actuel = NULL, *actuel_2 = NULL;
+	actuel = trajectoire->suivant;
+	actuel_2 = trajectoire;
 	Coordonnee output;
-	int trouver=0;
+	int tmp_distance_1=1000,tmp_distance_2;
 
+	//Recherche parmi la liste des coordonnées à suivre la plus proche du joueur
 	while(actuel != NULL)
 	{
-		if(actuel->coordonnees.x == pilote->coordx && 
-				actuel->coordonnees.y == pilote->coordy)
+		tmp_distance_2 = distance(actuel->coordonnees, pilote->coordonnee_map);
+
+		//On teste si la distance trouvée et inférieure à la precedente 
+		//et que le joueur ne se trouve pas sur la coordonnée observée
+		if(tmp_distance_2 <= tmp_distance_1 && tmp_distance_2 != 0)
 		{
-			actuel = actuel->suivant;
-
-			output.x = actuel->coordonnees.x;
-			output.y = actuel->coordonnees.y;
-
-			return output;
+			tmp_distance_1 = tmp_distance_2;
+			actuel_2 = actuel;
+	
 		}
 
 		actuel = actuel->suivant;
 	}
-/*
-	actuel = trajectoire;
 
-	while(trouver == 0)
-	{
-		if((actuel->coordonnees.x != pilote->coordx + pilote->velX -1&& 
-				actuel->coordonnees.y != pilote->coordy + pilote->velY -1)
-			||
-			(actuel->coordonnees.x != pilote->coordx + pilote->velX -1 && 
-					actuel->coordonnees.y != pilote->coordy + pilote->velY)
-			||
-			(actuel->coordonnees.x != pilote->coordx + pilote->velX -1 && 
-					actuel->coordonnees.y != pilote->coordy + pilote->velY +1)
-			||
-			(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
-					actuel->coordonnees.y != pilote->coordy + pilote->velY-1)
-			||
-			(actuel->coordonnees.x != pilote->coordx + pilote->velX && 
-					actuel->coordonnees.y != pilote->coordy + pilote->velY +1)
-			||
-			(actuel->coordonnees.x != pilote->coordx + pilote->velX +1 && 
-					actuel->coordonnees.y != pilote->coordy + pilote->velY -1)
-			||
-			(actuel->coordonnees.x != pilote->coordx + pilote->velX +1&& 
-					actuel->coordonnees.y != pilote->coordy + pilote->velY)
-			||
-			(actuel->coordonnees.x != pilote->coordx + pilote->velX +1 && 
-					actuel->coordonnees.y != pilote->coordy + pilote->velY +1))
-			trouver = 1;
-				actuel = actuel ->suivant;
+	//On teste si avec la vitesse du joueur actuel, le pilote peut aller à la coordonnée renvoyée
+	if(pilote->carte.matrice[actuel_2->coordonnees.x + pilote->coordonnee_vitesse.x][actuel_2->coordonnees.y + pilote->coordonnee_vitesse.y] == '#') {
+
+		output.x = actuel_2->coordonnees.x;
+		output.y = actuel_2->coordonnees.y;
+
+		fprintf(inf, "1 coord : %d %d ||\n", output.x, output.y);
+		return output;
+	}
+	else {
+		//Sinon, on renvoie la coordonnée precedente
+		output.x = actuel_2->precedent->coordonnees.x;
+		output.y = actuel_2->precedent->coordonnees.y;
+
+		fprintf(inf, "2 coord : %d %d ||\n", output.x, output.y);
+
+		return output;
+	}
+	
+	//En soit ne sert à rien à partir du moment où j'écris ce commentaire
+	//soit à 16h42 le 30 mai 2015
+	output.x = actuel_2->coordonnees.x;
+	output.y = actuel_2->coordonnees.y;
+
+	fprintf(inf, "3 coord : %d %d ||\n", output.x, output.y);
+
+	return output;
+}
+
+//############################################################################
+
+void rouler_pilote(Pilote *pilote, Coordonnee coordonnee, FILE *inf) {
+
+	int tmp_vitesse_X, tmp_vitesse_Y,tmp_acc_X,tmp_acc_Y, sup;
+	int i,j;
+
+	//Coordonnées du vecteur vitesse pour aller à la coordonnée donnée en paramètre
+	tmp_vitesse_X = coordonnee.x - pilote->coordonnee_map.x;	
+	tmp_vitesse_Y = coordonnee.y - pilote->coordonnee_map.y;
+
+	//Ré-initialisation des vecteurs accélérations
+	tmp_acc_X = tmp_acc_Y =pilote->coordonnee_acc.x = pilote->coordonnee_acc.y= 0;
+
+	//On normalise le vecteur accélération intermédiaire
+	if(tmp_vitesse_X < 0)
+		tmp_acc_X = -1;
+	if(tmp_vitesse_X > 0)
+		tmp_acc_X = 1;
+	if(tmp_vitesse_Y < 0)
+		tmp_acc_Y = -1;
+	if(tmp_vitesse_Y > 0)
+		tmp_acc_Y = 1;
+
+	//Si le pilote n'est pas dans le sable
+	if(pilote->carte.matrice[pilote->coordonnee_map.x][pilote->coordonnee_map.y] != '~') {
+
+		//On initialise les coordonnées de l'accélaration si besoin
+		//ATTENTION : deplacement de 1 en 1
+		if(pilote->coordonnee_vitesse.x != tmp_acc_X)
+			pilote->coordonnee_acc.x = tmp_acc_X;
+		if(pilote->coordonnee_vitesse.y != tmp_acc_Y)
+			pilote->coordonnee_acc.y = tmp_acc_Y;
+	}
+	else {
+		//On regarde dans le carré autour du joueur s'il peut trouver un emplacement hors sable
+		for(i=pilote->coordonnee_map.x -1; i<=pilote->coordonnee_map.x+1; i++) {
+			for(j=pilote->coordonnee_map.y -1; j<=pilote->coordonnee_map.y+1; j++) {
+
+				if(pilote->carte.matrice[i][j] == '#' && vecteur_vitesse(i-pilote->coordonnee_map.x,j-pilote->coordonnee_map.y)<1) {
+					fprintf(inf, "DANS LE SABLE MA GUEULE :OOOOO\n" );
+
+					pilote->coordonnee_acc.x = i-pilote->coordonnee_map.x;
+					pilote->coordonnee_acc.y = j-pilote->coordonnee_map.y;
+
+					i=10000;
+					j=10000;
+
+					exit(0);
+				}
+			}
 		}
 	}
 
-	output.x = actuel->coordonnees.x;
-	output.y = actuel->coordonnees.y;
-
-	return output;
-*/
-}
-
-//############################################################################
-
-void rouler_pilote(Pilote *pilote, Coordonnee coordonnee) {
-
-	int tmp_vitesse_x, tmp_vitesse_y,tmp_acc_x,tmp_acc_y;
-
-	//Coordonnées du vecteur vitesse
-	tmp_vitesse_x = coordonnee.x - pilote->coordx;	
-	tmp_vitesse_y = coordonnee.y - pilote->coordy;	
-
-	//Coordonnées de l'accélération à avoir
-	pilote->accX = tmp_vitesse_x - pilote->velX;
-	pilote->accY = tmp_vitesse_y - pilote->velY;
-	
-	if(pilote->accX == pilote->velX)
-	{
-		pilote->accX =0;
-	}
-	if(pilote->accY == pilote->velY)
-	{
-		pilote->accY =0;
-	}
-
-	pilote->velX += pilote->accX;
-	pilote->velY += pilote->accY;
+	//Mise à jour du vecteur vitesse
+	pilote->coordonnee_vitesse.x += pilote->coordonnee_acc.x;
+	pilote->coordonnee_vitesse.y += pilote->coordonnee_acc.y;
 
 
 }
 
 //############################################################################
+ /* if(tmp_vitesse_X < 0)
+		tmp_acc_X = -1;
+	if(tmp_acc_X > 0)
+		tmp_acc_X = 1;
+	if(tmp_acc_Y < 0)
+		tmp_acc_Y = -1;
+	if(tmp_acc_Y > 0)
+		tmp_acc_Y = 1;
+		*/

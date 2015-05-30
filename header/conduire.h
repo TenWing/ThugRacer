@@ -34,34 +34,19 @@
 typedef struct Pilote
 {
 	/**
-	 * @brief coordx : position abscisse du pilote
+	 * @brief coordonnee_map : les coordonnées du joueur sur la map
 	 */
-	int coordx;
+	Coordonnee coordonnee_map;
 
 	/**
-	 * @brief coordy : position ordonnée du pilote
+	 * @brief coordonnee_acc : les coordonnées du vecteur acceleration
 	 */
-	int coordy;
+	Coordonnee coordonnee_acc;
 
 	/**
-	 * @brief accX   : acceleration selon l'abscisse
+	 * @brief coordonnee_map : les coordonnées du vecteur vitesse
 	 */
-	int accX;
-
-	/**
-	 * @brief accY   : acceleration selon l'ordonnée
-	 */
-	int accY;
-
-	/**
-	 * @brief velX   : vitesse selon l'abscisse
-	 */
-	int velX;
-
-	/**
-	 * @brief velY   : vitesse selon l'ordonée
-	 */
-	int velY;
+	Coordonnee coordonnee_vitesse;
 
 	/**
 	 * @brief  carte : la carte du circuit
@@ -120,7 +105,7 @@ int determination_direction(Pilote *pilote);
  * @param trajectoire : la trajectoire idéale à suivre par le pilote
  * @return : les informations à envoyer au serveur
  */
-void rouler_pilote(Pilote *pilote, Coordonnee coordonnee);
+void rouler_pilote(Pilote *pilote, Coordonnee coordonnee, FILE *inf);
 /**
  * @brief  depense du carburant à un instant t
  * @param  accX      acceleration selon l'abscisse
@@ -132,5 +117,10 @@ void rouler_pilote(Pilote *pilote, Coordonnee coordonnee);
  */
 int deltaCarburantAcceleration(int accX, int accY, int velX, int velY, int dansSable);
 
-Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire);
+Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, FILE *inf);
+
+int vecteur_vitesse(int x, int y);
+
+int distance(Coordonnee pointA, Coordonnee pointB);
+
 #endif

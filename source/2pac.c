@@ -32,8 +32,8 @@ int main(int argc, char const *argv[]) {
 	//Situation du pilote et de ses concurrents
 	emplacement_pilote(&pilote, stdin);
 
-	dep.x = pilote.coordx; 
-	dep.y = pilote.coordy;
+	dep.x = pilote.coordonnee_map.x; 
+	dep.y = pilote.coordonnee_map.y;
 
 	for(i=0;i<pilote.carte.tailleX;i++)
 	{
@@ -56,23 +56,26 @@ int main(int argc, char const *argv[]) {
 	ptr = trajectoire;
 	fclose(info);
 
+	FILE *inf = fopen("aide.txt", "w+");
+
 	//Debut de la course
-	while(n<2000) 
+	while(n<1000) 
 	{
 		if(n!=0)
 			//Situation du pilote et de ses concurrents
 			emplacement_pilote(&pilote, stdin);
 
-		coordonnee = get_trajectoire_coordonnee(&pilote, trajectoire);
+		coordonnee = get_trajectoire_coordonnee(&pilote, trajectoire, inf);
 
 		//Le pilote se déplace
-		rouler_pilote(&pilote,coordonnee);
+		rouler_pilote(&pilote,coordonnee,inf);
 	
 		//Instruction pour le serveur
-		pilote.carte.carburant += deltaCarburantAcceleration(pilote.accX, pilote.accY, pilote.velX, pilote.velY, 0);
+		pilote.carte.carburant += deltaCarburantAcceleration(pilote.coordonnee_acc.x, pilote.coordonnee_acc.y, 
+			pilote.coordonnee_vitesse.x, pilote.coordonnee_vitesse.y, 0);
 
 
-		fprintf(stdout, "%d %d\n", pilote.accX, pilote.accY);
+		fprintf(stdout, "%d %d\n",pilote.coordonnee_acc.x, pilote.coordonnee_acc.y);
 
 		// Vidage du buffer nécessaire.
 		fflush(stdout);
@@ -80,6 +83,8 @@ int main(int argc, char const *argv[]) {
 		n++;
 
 	}
+
+	fclose(inf);
 
 	//Destruction du pilote
 	detruire_pilote(&pilote);
