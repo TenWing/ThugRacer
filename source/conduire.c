@@ -132,7 +132,7 @@ int determination_position(char *tab, int debut) {
 //############################################################################
 
 int vecteur_vitesse(int x, int y) {
-	return sqrt(x*x + y*y);
+	return (x*x + y*y);
 }
 
 //############################################################################
@@ -240,20 +240,20 @@ void rouler_pilote(Pilote *pilote, Coordonnee coordonnee, FILE *inf) {
 			pilote->coordonnee_acc.y = tmp_acc_Y;
 	}
 	else {
+
 		//On regarde dans le carré autour du joueur s'il peut trouver un emplacement hors sable
 		for(i=pilote->coordonnee_map.x -1; i<=pilote->coordonnee_map.x+1; i++) {
 			for(j=pilote->coordonnee_map.y -1; j<=pilote->coordonnee_map.y+1; j++) {
 
-				if(pilote->carte.matrice[i][j] == '#' && vecteur_vitesse(i-pilote->coordonnee_map.x,j-pilote->coordonnee_map.y)<1) {
-					fprintf(inf, "DANS LE SABLE MA GUEULE :OOOOO\n" );
+				if(pilote->carte.matrice[i][j] == '#' && vecteur_vitesse(i-pilote->coordonnee_map.x,j-pilote->coordonnee_map.y)<=1) {
 
 					pilote->coordonnee_acc.x = i-pilote->coordonnee_map.x;
 					pilote->coordonnee_acc.y = j-pilote->coordonnee_map.y;
 
+					fprintf(inf, "coordonnees : %d %d\n", i-pilote->coordonnee_map.x,j-pilote->coordonnee_map.y);
+
 					i=10000;
 					j=10000;
-
-					exit(0);
 				}
 			}
 		}
@@ -267,12 +267,3 @@ void rouler_pilote(Pilote *pilote, Coordonnee coordonnee, FILE *inf) {
 }
 
 //############################################################################
- /* if(tmp_vitesse_X < 0)
-		tmp_acc_X = -1;
-	if(tmp_acc_X > 0)
-		tmp_acc_X = 1;
-	if(tmp_acc_Y < 0)
-		tmp_acc_Y = -1;
-	if(tmp_acc_Y > 0)
-		tmp_acc_Y = 1;
-		*/
