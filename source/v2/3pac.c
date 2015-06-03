@@ -49,23 +49,10 @@ int main(int argc, char const *argv[]) {
 
 	virages = construire_virages(trajectoire, pilote.carte);
 
-	FILE *inf = fopen("3pac.txt", "w+");
-
-	fprintf(inf, "coord virage : %d %d\n", virages->point.x, virages->point.y);
-	fprintf(inf, "rayon : %d\n", virages->rayon);
-	fprintf(inf, "direction : %d\n", virages->direction);
-	fprintf(inf, "directionFrein : %d\n", virages->directionFrein);
-
-	// afficher_chemin(trajectoire, pilote.carte, inf);
-
-	//Debut de la course
 	demarre(&pilote);
 
 	// On conduit jusqu'à la fin
 	piloter(&pilote, virages);
-
-	// Fermeture fichier
-	fclose(inf);
 
 	//Destruction du pilote
 	detruire_pilote(&pilote);

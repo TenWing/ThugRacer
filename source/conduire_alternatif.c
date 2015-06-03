@@ -363,19 +363,19 @@ void demarre(Pilote* pilote)
 	// On regarde dans les 4 directions droites de départ
 	
 	// Regarde en haut
-	if(pilote->carte.matrice[x][y-2] == '#')
+	if(y >= 5 && pilote->carte.matrice[x][y-5] == '#')
 	{
 		pilote->coordonnee_acc.x = 0;
 		pilote->coordonnee_acc.y = -1;
 	}
 	// Regarde en bas
-	else if(pilote->carte.matrice[x][y+2] == '#')
+	else if(y<= (pilote->carte.tailleY - 5) && pilote->carte.matrice[x][y+5] == '#')
 	{
 		pilote->coordonnee_acc.x = 0;
 		pilote->coordonnee_acc.y = 1;
 	}
 	// Regarde a gauche
-	else if(pilote->carte.matrice[x-2][y] == '#')
+	else if(x >= 5 && pilote->carte.matrice[x-5][y] == '#')
 	{
 		pilote->coordonnee_acc.x = -1;
 		pilote->coordonnee_acc.y = 0;
@@ -395,9 +395,8 @@ void demarre(Pilote* pilote)
 void piloter(Pilote* pilote, Virage* virage)
 {
 	int n = 0;
-	FILE* output = fopen("IFICANT.txt", "w+");
 
-	while(n < 30)
+	while(!(feof(stdin)))
 	{
 		//Instruction pour le serveur
 		pilote->carte.carburant += deltaCarburantAcceleration(pilote->coordonnee_acc.x, pilote->coordonnee_acc.y, 
@@ -421,7 +420,6 @@ void piloter(Pilote* pilote, Virage* virage)
 		// Tant qu'il reste des virages à négocier
 		if(virage != NULL)
 		{
-			fprintf(output, "Prochain virage vers : %d\n", virage->direction);
 
 			if(dans_virage(pilote->coordonnee_map, virage)
 				|| dans_virage(estimee, virage))
@@ -431,24 +429,9 @@ void piloter(Pilote* pilote, Virage* virage)
 				virage = virage->suivant;
 		}
 
-		//###############PARTIE DEBUGGING###################################################
-
-		fprintf(output, "Case estimée : %c\n", pilote->carte.matrice[estimee.x][estimee.y]);
-		// On joue le tour
-		fprintf(output, "status %d %d\n", pilote->coordonnee_map.x, pilote->coordonnee_map.y);
-		fprintf(output, "vitesse %d %d\n", pilote->coordonnee_vitesse.x, pilote->coordonnee_vitesse.y);
-
-		if(vecteur_vitesse(pilote->coordonnee_vitesse.x + pilote->coordonnee_acc.x, pilote->coordonnee_acc.y + pilote->coordonnee_vitesse.y) > 25)
-			fprintf(output, "ILLEGAL\n");
-
-		fprintf(output, "je joue %d %d\n",pilote->coordonnee_acc.x, pilote->coordonnee_acc.y);
-
-		//###################################################################################
-
 		fprintf(stdout, "%d %d\n",pilote->coordonnee_acc.x, pilote->coordonnee_acc.y);
 		fflush(stdout);
 		n++;
 	}
 
-	fclose(output);
 }

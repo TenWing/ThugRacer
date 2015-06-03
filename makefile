@@ -10,6 +10,7 @@
 #Nom de l'executable final
 export EXEC=2pac
 export EXEC2=3pac
+export EXEC3=2pac_naif
 ##############################
 ##/////////////////////////////////////////////////
 
@@ -102,3 +103,25 @@ source/v2/conduire_alternatif.o: 	source/conduire_alternatif.c
 
 $(RUN_DIR)/$(EXEC2):				$(BUILD_DIR)/$(SOURCE_DIR)/carte.o $(BUILD_DIR)/$(SOURCE_DIR)/conduire.o $(BUILD_DIR)/$(SOURCE_DIR)/liste.o $(BUILD_DIR)/$(SOURCE_DIR)/noeud.o $(BUILD_DIR)/$(SOURCE_DIR)/star.o source/v2/conduire_alternatif.o source/v2/3pac.o
 									@$(CC) -o $@ $^ $(LDFLAGS)
+
+###########################################################################
+patch_gp_naif:
+									@echo "Ajout de 2pac_naif aux pilotes"
+									@rm -rf $(DRIVER_DIR)/$(EXEC3)
+									@cp $(RUN_DIR)/$(EXEC3) $(DRIVER_DIR)
+
+naif:								$(RUN_DIR)/$(EXEC3)
+
+source/naif/2pac_naif.o:			source/naif/2pac_naif.c
+									$(CC) -o $@ -c $^ $(CFLAGS) $(LDFLAGS)
+
+source/naif/conduire_naif.o:	 	source/naif/conduire_naif.c
+									$(CC) -o $@ -c $^ $(CFLAGS) $(LDFLAGS)
+
+$(RUN_DIR)/$(EXEC3):				$(BUILD_DIR)/$(SOURCE_DIR)/carte.o $(BUILD_DIR)/$(SOURCE_DIR)/liste.o $(BUILD_DIR)/$(SOURCE_DIR)/noeud.o $(BUILD_DIR)/$(SOURCE_DIR)/star.o source/naif/conduire_naif.o source/naif/2pac_naif.o 
+									$(CC) -o $@ $^ $(LDFLAGS)
+
+
+
+
+

@@ -110,7 +110,7 @@ int determination_direction(Pilote *pilote);
  * @param trajectoire : la trajectoire idéale à suivre par le pilote
  * @return : les informations à envoyer au serveur
  */
-void rouler_pilote(Pilote *pilote, Coordonnee coordonnee, FILE *inf);
+void rouler_pilote(Pilote *pilote, Coordonnee coordonnee);
 /**
  * @brief  depense du carburant à un instant t
  * @param  accX      acceleration selon l'abscisse
@@ -122,7 +122,13 @@ void rouler_pilote(Pilote *pilote, Coordonnee coordonnee, FILE *inf);
  */
 int deltaCarburantAcceleration(int accX, int accY, int velX, int velY, int dansSable);
 
-Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, FILE *inf);
+/**
+ * @brief  Recupere la coordonnée à aller de la trajectoire
+ * @param  pilote      le pilote
+ * @param  trajectoire la trajectoire
+ * @return la coordonnee à suivre
+ */
+Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire);
 
 /**
  * @brief 	renvoie la norme du vecteur vitesse au carré
@@ -132,8 +138,27 @@ Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, 
  */
 int vecteur_vitesse(int x, int y);
 
+/**
+ * @brief  renvoie la distance entre deux points
+ * @param  pointA 
+ * @param  pointB 
+ * @return la distance 
+ */
 int distance(Coordonnee pointA, Coordonnee pointB);
 
+/**
+ * @brief  renvoie le max entre 2 entiers
+ * @param  a 
+ * @param  b 
+ * @return le max entre a et b
+ */
 int max(int a, int b);
+
+/**
+ * @brief  recherche la fin de la piste
+ * @param  pilote 
+ * @return la coordonnee de la fin de la piste
+ */
+Coordonnee recherche_fin_piste(Pilote *pilote);
 
 #endif

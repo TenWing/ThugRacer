@@ -1,5 +1,5 @@
 /**
- * @file	2pac.c
+ * @file	2pac_naif.c
  * @author	Quentin & Tendry
  * @brief	LE pilote del'équipe ThugRacer récemment embauché au prix faramineux de plus de 56 Millions de US$
  */
@@ -33,7 +33,17 @@ int main(int argc, char const *argv[]) {
 	dep.x = pilote.coordonnee_map.x; 
 	dep.y = pilote.coordonnee_map.y;
 
-	end = recherche_fin_piste(&pilote);
+	for(i=0;i<pilote.carte.tailleX;i++)
+	{
+		for(j=0;j<pilote.carte.tailleY;j++)
+		{
+			if(pilote.carte.matrice[i][j] == '=')
+			{
+				end.x = i; 
+				end.y = j;
+			}
+		}
+	}
 
 	trajectoire = trouver_chemin(dep, end, pilote.carte);
 
