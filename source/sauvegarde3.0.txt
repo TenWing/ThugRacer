@@ -1,0 +1,56 @@
+Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, FILE *inf) {
+
+	Trajectoire *actuel = NULL, *actuel_2 = NULL;
+	actuel = trajectoire;
+	Coordonnee output;
+	int compteur=0;
+
+	//Recherche parmi la liste des coordonnées à suivre la plus proche du joueur
+	while(actuel != NULL)
+	{
+
+		if(actuel->coordonnees.x == pilote->coordonnee_trajectoire.x 
+			&& actuel->coordonnees.y == pilote->coordonnee_trajectoire.y) {
+
+			compteur = max(pilote->coordonnee_vitesse.x, pilote->coordonnee_vitesse.y);
+
+			while(compteur != 0) {
+				actuel = actuel->suivant;
+				compteur--;
+			}
+
+			actuel_2 = actuel;
+
+			actuel = NULL;
+
+			fprintf(inf, "coordonnee_trajectoire (pas pilote) : %d %d || ", actuel_2->coordonnees.x, actuel_2->coordonnees.y );
+		}
+
+		if(actuel != NULL)
+			actuel = actuel->suivant;
+
+	}
+
+	actuel = actuel_2->suivant;
+
+	if(actuel->coordonnees.x != actuel_2->coordonnees.x 
+		&& actuel->coordonnees.y != actuel_2->coordonnees.y) {
+
+		
+		pilote->coordonnee_trajectoire.x = output.x = actuel->coordonnees.x;
+		pilote->coordonnee_trajectoire.y = output.y = actuel->coordonnees.y;
+		
+		fprintf(inf, " 2 output : %d %d\n", output.x, output.y );
+
+		return output;
+
+	}
+
+	pilote->coordonnee_trajectoire.x = output.x = actuel_2->coordonnees.x;
+	pilote->coordonnee_trajectoire.y = output.y = actuel_2->coordonnees.y;
+	
+	fprintf(inf, " 1 output : %d %d\n", output.x, output.y );
+
+	return output;
+
+}

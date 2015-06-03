@@ -140,15 +140,45 @@ int vecteur_vitesse(int x, int y) {
 int distance(Coordonnee pointA, Coordonnee pointB) {
 	return sqrt((pointB.x - pointA.x)*(pointB.x - pointA.x) + (pointB.y - pointA.y)*(pointB.y - pointA.y));
 }
-//############################################################################
 
 //############################################################################
 
-void depart_pilote(Pilote *pilote)
-{
+int max(int a, int b) {
+	if(a<0)
+		a=-a;
+	if(b<0)
+		b=-b;
+	if(a<b)
+		return b;
+
+	return a;
+}
+//############################################################################
+
+void depart_pilote(Pilote *pilote) {
+
+	if(pilote->carte.matrice[pilote->coordonnee_map.x + 5][pilote->coordonnee_map.y] == '#') {
+		pilote->coordonnee_acc.x++;
+	}
+	else if(pilote->carte.matrice[pilote->coordonnee_map.x - 5][pilote->coordonnee_map.y] == '#') {
+		pilote->coordonnee_acc.x--;
+	}
+	else if(pilote->carte.matrice[pilote->coordonnee_map.x][pilote->coordonnee_map.y + 5] == '#') {
+		pilote->coordonnee_acc.y++;
+	}
+	else {
+		pilote->coordonnee_acc.y--;
+	}
+
+	pilote->coordonnee_vitesse.x += pilote->coordonnee_acc.x;
+	pilote->coordonnee_vitesse.y += pilote->coordonnee_acc.y;
+
+	pilote->coordonnee_trajectoire.x = pilote->coordonnee_map.x;
+	pilote->coordonnee_trajectoire.y = pilote->coordonnee_map.y;
 
 }
 
+//############################################################################
 //############################################################################
 
 Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, FILE *inf) {
@@ -182,7 +212,6 @@ Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, 
 		output.x = actuel_2->coordonnees.x;
 		output.y = actuel_2->coordonnees.y;
 
-		fprintf(inf, "1 coord : %d %d ||\n", output.x, output.y);
 		return output;
 	}
 	else {
@@ -190,19 +219,8 @@ Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, 
 		output.x = actuel_2->precedent->coordonnees.x;
 		output.y = actuel_2->precedent->coordonnees.y;
 
-		fprintf(inf, "2 coord : %d %d ||\n", output.x, output.y);
-
 		return output;
 	}
-	
-	//En soit ne sert à rien à partir du moment où j'écris ce commentaire
-	//soit à 16h42 le 30 mai 2015
-	output.x = actuel_2->coordonnees.x;
-	output.y = actuel_2->coordonnees.y;
-
-	fprintf(inf, "3 coord : %d %d ||\n", output.x, output.y);
-
-	return output;
 }
 
 //############################################################################
@@ -231,29 +249,68 @@ void rouler_pilote(Pilote *pilote, Coordonnee coordonnee, FILE *inf) {
 
 	//Si le pilote n'est pas dans le sable
 	if(pilote->carte.matrice[pilote->coordonnee_map.x][pilote->coordonnee_map.y] != '~') {
+		//Si la vitesse est dans la norme
+		if(vecteur_vitesse(pilote->coordonnee_vitesse.x + tmp_acc_X, pilote->coordonnee_vitesse.y + tmp_acc_Y)<25) {
 
-		//On initialise les coordonnées de l'accélaration si besoin
-		//ATTENTION : deplacement de 1 en 1
-		if(pilote->coordonnee_vitesse.x != tmp_acc_X)
-			pilote->coordonnee_acc.x = tmp_acc_X;
-		if(pilote->coordonnee_vitesse.y != tmp_acc_Y)
-			pilote->coordonnee_acc.y = tmp_acc_Y;
+			//Si le pilote peut accélérer
+			if(pilote->carte.matrice[pilote->coordonnee_map.x + pilote->coordonnee_vitesse.x + tmp_acc_X]
+				[pilote->coordonnee_map.y + pilote->coordonnee_vitesse.y + tmp_acc_Y] == '#') {
+
+				pilote->coordonnee_acc.x = tmp_acc_X;
+				pilote->coordonnee_acc.y = tmp_acc_Y;
+			}
+			//Si le pilote avec sa vitesse, peut aller à la coordonnée donnée
+			else if(pilote->carte.matrice[pilote->coordonnee_map.x + pilote->coordonnee_vitesse.x]
+				[pilote->coordonnee_map.y + pilote->coordonnee_vitesse.y] == '#' && pilote->coordonnee_vitesse.x !=0
+				&& pilote->coordonnee_vitesse.y != 0) {
+
+
+				pilote->coordonnee_acc.x = 0;
+				pilote->coordonnee_acc.y = 0;
+			}
+			else {
+
+
+				pilote->coordonnee_acc.x = tmp_acc_X;
+				pilote->coordonnee_acc.y = tmp_acc_Y;
+			}
+			
+
+		}
+		
 	}
 	else {
 
 		//On regarde dans le carré autour du joueur s'il peut trouver un emplacement hors sable
-		for(i=pilote->coordonnee_map.x -1; i<=pilote->coordonnee_map.x+1; i++) {
-			for(j=pilote->coordonnee_map.y -1; j<=pilote->coordonnee_map.y+1; j++) {
+		for(i=pilote->coordonnee_map.x -3; i<=pilote->coordonnee_map.x+3; i++) {
+			for(j=pilote->coordonnee_map.y -3; j<=pilote->coordonnee_map.y+3; j++) {
 
-				if(pilote->carte.matrice[i][j] == '#' && vecteur_vitesse(i-pilote->coordonnee_map.x,j-pilote->coordonnee_map.y)<=1) {
+				if(pilote->carte.matrice[i][j] == '#' && vecteur_vitesse(i-pilote->coordonnee_map.x,j-pilote->coordonnee_map.y) == 9 ) {
 
-					pilote->coordonnee_acc.x = i-pilote->coordonnee_map.x;
-					pilote->coordonnee_acc.y = j-pilote->coordonnee_map.y;
+					//Coordonnées du vecteur vitesse pour aller à la coordonnée donnée en paramètre
+					tmp_vitesse_X = i - pilote->coordonnee_map.x;	
+					tmp_vitesse_Y = j - pilote->coordonnee_map.y;
 
-					fprintf(inf, "coordonnees : %d %d\n", i-pilote->coordonnee_map.x,j-pilote->coordonnee_map.y);
+					tmp_acc_X = tmp_acc_Y = 0;
 
-					i=10000;
-					j=10000;
+					//On normalise le vecteur accélération intermédiaire
+					if(tmp_vitesse_X < 0)
+						tmp_acc_X = -1;
+					if(tmp_vitesse_X > 0)
+						tmp_acc_X = 1;
+					if(tmp_vitesse_Y < 0)
+						tmp_acc_Y = -1;
+					if(tmp_vitesse_Y > 0)
+						tmp_acc_Y = 1;
+
+					if(vecteur_vitesse(tmp_acc_Y,tmp_acc_X) == 1) {
+						pilote->coordonnee_acc.x = tmp_acc_X;
+						pilote->coordonnee_acc.y = tmp_acc_Y;
+
+						i=10000;
+						j=10000;
+					}
+					
 				}
 			}
 		}
@@ -267,3 +324,12 @@ void rouler_pilote(Pilote *pilote, Coordonnee coordonnee, FILE *inf) {
 }
 
 //############################################################################
+//
+/*
+//On initialise les coordonnées de l'accélaration si besoin
+		//ATTENTION : deplacement de 1 en 1
+		if(pilote->coordonnee_vitesse.x != tmp_acc_X)
+			pilote->coordonnee_acc.x = tmp_acc_X;
+		if(pilote->coordonnee_vitesse.y != tmp_acc_Y)
+			pilote->coordonnee_acc.y = tmp_acc_Y;
+ */

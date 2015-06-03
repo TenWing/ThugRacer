@@ -49,6 +49,11 @@ typedef struct Pilote
 	Coordonnee coordonnee_vitesse;
 
 	/**
+	 * @brief coordonnee_trajectoire : les coordonnees de la trajectoire récupérée
+	 */
+	Coordonnee coordonnee_trajectoire;
+
+	/**
 	 * @brief  carte : la carte du circuit
 	 */
 	Carte carte;
@@ -128,5 +133,7 @@ Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, 
 int vecteur_vitesse(int x, int y);
 
 int distance(Coordonnee pointA, Coordonnee pointB);
+
+int max(int a, int b);
 
 #endif

@@ -55,12 +55,23 @@ int main(int argc, char const *argv[]) {
 
 	FILE *inf = fopen("aide.txt", "w+");
 
+	depart_pilote(&pilote);
+
+	pilote.carte.carburant += deltaCarburantAcceleration(pilote.coordonnee_acc.x, pilote.coordonnee_acc.y, 
+	pilote.coordonnee_vitesse.x, pilote.coordonnee_vitesse.y, 0);
+
+
+	fprintf(stdout, "%d %d\n",pilote.coordonnee_acc.x, pilote.coordonnee_acc.y);
+
+	// Vidage du buffer nécessaire.
+	fflush(stdout);
+
 	//Debut de la course
-	while(n<1000) 
+	while(!(feof(stdin))) 
 	{
-		if(n!=0)
-			//Situation du pilote et de ses concurrents
-			emplacement_pilote(&pilote, stdin);
+		
+		//Situation du pilote et de ses concurrents
+		emplacement_pilote(&pilote, stdin);
 
 		coordonnee = get_trajectoire_coordonnee(&pilote, trajectoire, inf);
 
@@ -90,49 +101,6 @@ int main(int argc, char const *argv[]) {
 }
 
 
-	
-/*
-	fprintf(info, "%d\n", pilote.coordx);
-
-	Trajectoire* ptr = NULL;
-	ptr = trajectoire;
-
-	if(!ptr)
-		fprintf(info, "NON T_T\n");
-
-	while(ptr != NULL)
-	{
-		fprintf(info, "%d %d\n", ptr->coordonnees.x, ptr->coordonnees.y);
-		ptr = ptr->suivant;
-	}
-
-	
-	//Determination de la direction lors du départ
-	depart_pilote(&pilote);
-
-	//Instruction pour le serveur
-	pilote.carte.carburant += deltaCarburantAcceleration(pilote.accX, pilote.accY, pilote.velX, pilote.velY, 0);
-
-	fprintf(stdout, "%d %d\n", pilote.accX, pilote.accY);
-
-	// Vidage du buffer nécessaire.
-	fflush(stdout);
-
-	//Debut de la course
-	while(!feof(stdin)) {
-	
-		//Situation du pilote et de ses concurrents
-		emplacement_pilote(&pilote, stdin);
-
-		//Le pilote se déplace
-		rouler_pilote(&pilote);
-	
-		//Instruction pour le serveur
-		pilote.carte.carburant += deltaCarburantAcceleration(pilote.accX, pilote.accY, pilote.velX, pilote.velY, 0);
-
-		fprintf(stdout, "%d %d\n", pilote.accX, pilote.accY);
-
-		// Vidage du buffer nécessaire.
-		fflush(stdout);
-	}
-	*/
+	//	fprintf(inf, "[%d] || coordonnee_acc : %d %d || coordonnee_vitesse : %d %d || coordonnee_map : %d %d\n\n\n",
+	//	 n, pilote.coordonnee_acc.x, pilote.coordonnee_acc.y, 
+	//		pilote.coordonnee_vitesse.x, pilote.coordonnee_vitesse.y, pilote.coordonnee_map.x, pilote.coordonnee_map.y);
