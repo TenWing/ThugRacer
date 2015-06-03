@@ -119,6 +119,12 @@ int deltaCarburantAcceleration(int accX, int accY, int velX, int velY, int dansS
 
 Coordonnee get_trajectoire_coordonnee(Pilote *pilote, Trajectoire *trajectoire, FILE *inf);
 
+/**
+ * @brief 	renvoie la norme du vecteur vitesse au carré
+ * @param  x la coordonnée x du vecteur de vitesse
+ * @param  y la coordonnée y du vecteur vitesse
+ * @return   la noooorme²
+ */
 int vecteur_vitesse(int x, int y);
 
 int distance(Coordonnee pointA, Coordonnee pointB);

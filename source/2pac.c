@@ -49,11 +49,8 @@ int main(int argc, char const *argv[]) {
 
 	trajectoire = trouver_chemin(dep, end, pilote.carte);
 
-	Trajectoire *ptr = trajectoire;
-
 	// afficher_chemin(trajectoire, pilote.carte, info);
 
-	ptr = trajectoire;
 	fclose(info);
 
 	FILE *inf = fopen("aide.txt", "w+");

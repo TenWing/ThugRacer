@@ -100,8 +100,8 @@ void emplacement_pilote(Pilote *pilote, FILE *fichier) {
 
 	pilote->coordonnee_map.x = entier[0];
 	pilote->coordonnee_map.y = entier[1];
-	pilote->carte.matrice[entier[3]][entier[2]] = '*';
-	pilote->carte.matrice[entier[5]][entier[4]] = '*';
+	pilote->carte.matrice[entier[2]][entier[3]] = '*';
+	pilote->carte.matrice[entier[4]][entier[5]] = '*';
 
 }
 
