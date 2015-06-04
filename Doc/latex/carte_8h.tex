@@ -1,0 +1,107 @@
+\hypertarget{carte_8h}{\section{header/carte.h File Reference}
+\label{carte_8h}\index{header/carte.\-h@{header/carte.\-h}}
+}
+
+
+Définit une carte de jeu, en l'occurence une piste de course.  
+
+
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_carte}{Carte}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct_carte}{Carte} \hyperlink{carte_8h_abd96d4afde54ec0be90c0393c1bedc48}{Carte}
+\begin{DoxyCompactList}\small\item\em La carte du jeu, correspond à la piste de course. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_carte}{Carte} \hyperlink{carte_8h_a628398ab7c338f0a277685da9b466851}{construit\-\_\-carte} (int taille\-X, int taille\-Y, int carburant)
+\begin{DoxyCompactList}\small\item\em Construit une carte de course. \end{DoxyCompactList}\item 
+void \hyperlink{carte_8h_ad759d3059d55c0a3b830725c3dc4faf6}{detruire\-\_\-carte} (\hyperlink{struct_carte}{Carte} $\ast$carte)
+\begin{DoxyCompactList}\small\item\em désalloue la matrice dynamique d'une carte \end{DoxyCompactList}\item 
+\hyperlink{struct_carte}{Carte} \hyperlink{carte_8h_a5497375b878ad115d184b5a17c5f41bd}{charge\-\_\-carte} (F\-I\-L\-E $\ast$fichier)
+\begin{DoxyCompactList}\small\item\em Charge une carteà partir d'un fichier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Définit une carte de jeu, en l'occurence une piste de course. \begin{DoxyDate}{Date}
+05 Avril 2015 
+\end{DoxyDate}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{carte_8h_abd96d4afde54ec0be90c0393c1bedc48}{\index{carte.\-h@{carte.\-h}!Carte@{Carte}}
+\index{Carte@{Carte}!carte.h@{carte.\-h}}
+\subsubsection[{Carte}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf Carte} {\bf Carte}}}\label{carte_8h_abd96d4afde54ec0be90c0393c1bedc48}
+
+
+La carte du jeu, correspond à la piste de course. 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{carte_8h_a5497375b878ad115d184b5a17c5f41bd}{\index{carte.\-h@{carte.\-h}!charge\-\_\-carte@{charge\-\_\-carte}}
+\index{charge\-\_\-carte@{charge\-\_\-carte}!carte.h@{carte.\-h}}
+\subsubsection[{charge\-\_\-carte}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Carte} charge\-\_\-carte (
+\begin{DoxyParamCaption}
+\item[{F\-I\-L\-E $\ast$}]{fichier}
+\end{DoxyParamCaption}
+)}}\label{carte_8h_a5497375b878ad115d184b5a17c5f41bd}
+
+
+Charge une carteà partir d'un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fichier} & le fichier contenant les informations de la carte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une carte bien chargée 
+\end{DoxyReturn}
+\hypertarget{carte_8h_a628398ab7c338f0a277685da9b466851}{\index{carte.\-h@{carte.\-h}!construit\-\_\-carte@{construit\-\_\-carte}}
+\index{construit\-\_\-carte@{construit\-\_\-carte}!carte.h@{carte.\-h}}
+\subsubsection[{construit\-\_\-carte}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Carte} construit\-\_\-carte (
+\begin{DoxyParamCaption}
+\item[{int}]{taille\-X, }
+\item[{int}]{taille\-Y, }
+\item[{int}]{carburant}
+\end{DoxyParamCaption}
+)}}\label{carte_8h_a628398ab7c338f0a277685da9b466851}
+
+
+Construit une carte de course. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em taille\-X} & la taille X de la matrice \\
+\hline
+{\em taille\-Y} & la taille Y de la matrice \\
+\hline
+{\em carburant} & la quantité de carburant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une carte initialisée 
+\end{DoxyReturn}
+\hypertarget{carte_8h_ad759d3059d55c0a3b830725c3dc4faf6}{\index{carte.\-h@{carte.\-h}!detruire\-\_\-carte@{detruire\-\_\-carte}}
+\index{detruire\-\_\-carte@{detruire\-\_\-carte}!carte.h@{carte.\-h}}
+\subsubsection[{detruire\-\_\-carte}]{\setlength{\rightskip}{0pt plus 5cm}void detruire\-\_\-carte (
+\begin{DoxyParamCaption}
+\item[{{\bf Carte} $\ast$}]{carte}
+\end{DoxyParamCaption}
+)}}\label{carte_8h_ad759d3059d55c0a3b830725c3dc4faf6}
+
+
+désalloue la matrice dynamique d'une carte 
+
+
+\begin{DoxyParams}{Parameters}
+{\em carte} & la carte à désallouée \\
+\hline
+\end{DoxyParams}

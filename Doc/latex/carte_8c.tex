@@ -1,0 +1,89 @@
+\hypertarget{carte_8c}{\section{source/carte.c File Reference}
+\label{carte_8c}\index{source/carte.\-c@{source/carte.\-c}}
+}
+
+
+Code source du module de la carte.  
+
+
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$carte.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_carte}{Carte} \hyperlink{carte_8c_a628398ab7c338f0a277685da9b466851}{construit\-\_\-carte} (int taille\-X, int taille\-Y, int carburant)
+\begin{DoxyCompactList}\small\item\em Construit une carte de course. \end{DoxyCompactList}\item 
+void \hyperlink{carte_8c_ad759d3059d55c0a3b830725c3dc4faf6}{detruire\-\_\-carte} (\hyperlink{struct_carte}{Carte} $\ast$carte)
+\begin{DoxyCompactList}\small\item\em désalloue la matrice dynamique d'une carte \end{DoxyCompactList}\item 
+\hyperlink{struct_carte}{Carte} \hyperlink{carte_8c_a5497375b878ad115d184b5a17c5f41bd}{charge\-\_\-carte} (F\-I\-L\-E $\ast$fichier)
+\begin{DoxyCompactList}\small\item\em Charge une carteà partir d'un fichier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Code source du module de la carte. \begin{DoxyDate}{Date}
+05 Avril 2015 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{carte_8c_a5497375b878ad115d184b5a17c5f41bd}{\index{carte.\-c@{carte.\-c}!charge\-\_\-carte@{charge\-\_\-carte}}
+\index{charge\-\_\-carte@{charge\-\_\-carte}!carte.c@{carte.\-c}}
+\subsubsection[{charge\-\_\-carte}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Carte} charge\-\_\-carte (
+\begin{DoxyParamCaption}
+\item[{F\-I\-L\-E $\ast$}]{fichier}
+\end{DoxyParamCaption}
+)}}\label{carte_8c_a5497375b878ad115d184b5a17c5f41bd}
+
+
+Charge une carteà partir d'un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fichier} & le fichier contenant les informations de la carte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une carte bien chargée 
+\end{DoxyReturn}
+\hypertarget{carte_8c_a628398ab7c338f0a277685da9b466851}{\index{carte.\-c@{carte.\-c}!construit\-\_\-carte@{construit\-\_\-carte}}
+\index{construit\-\_\-carte@{construit\-\_\-carte}!carte.c@{carte.\-c}}
+\subsubsection[{construit\-\_\-carte}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Carte} construit\-\_\-carte (
+\begin{DoxyParamCaption}
+\item[{int}]{taille\-X, }
+\item[{int}]{taille\-Y, }
+\item[{int}]{carburant}
+\end{DoxyParamCaption}
+)}}\label{carte_8c_a628398ab7c338f0a277685da9b466851}
+
+
+Construit une carte de course. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em taille\-X} & la taille X de la matrice \\
+\hline
+{\em taille\-Y} & la taille Y de la matrice \\
+\hline
+{\em carburant} & la quantité de carburant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une carte initialisée 
+\end{DoxyReturn}
+\hypertarget{carte_8c_ad759d3059d55c0a3b830725c3dc4faf6}{\index{carte.\-c@{carte.\-c}!detruire\-\_\-carte@{detruire\-\_\-carte}}
+\index{detruire\-\_\-carte@{detruire\-\_\-carte}!carte.c@{carte.\-c}}
+\subsubsection[{detruire\-\_\-carte}]{\setlength{\rightskip}{0pt plus 5cm}void detruire\-\_\-carte (
+\begin{DoxyParamCaption}
+\item[{{\bf Carte} $\ast$}]{carte}
+\end{DoxyParamCaption}
+)}}\label{carte_8c_ad759d3059d55c0a3b830725c3dc4faf6}
+
+
+désalloue la matrice dynamique d'une carte 
+
+
+\begin{DoxyParams}{Parameters}
+{\em carte} & la carte à désallouée \\
+\hline
+\end{DoxyParams}

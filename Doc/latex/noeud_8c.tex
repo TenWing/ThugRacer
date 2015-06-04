@@ -1,0 +1,63 @@
+\hypertarget{noeud_8c}{\section{source/noeud.c File Reference}
+\label{noeud_8c}\index{source/noeud.\-c@{source/noeud.\-c}}
+}
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$noeud.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_noeud}{Noeud} \hyperlink{noeud_8c_a33ba90b42cf1bdaefe9d24650a8cced9}{construire\-\_\-noeud} (int G, int H, \hyperlink{struct_coordonnee}{Coordonnee} coordonnees)
+\begin{DoxyCompactList}\small\item\em construit un noeud de l'espace de jeu \end{DoxyCompactList}\item 
+int \hyperlink{noeud_8c_a936f004b840b6478b07aa56265e05da7}{cout\-\_\-g} (\hyperlink{struct_noeud}{Noeud} $\ast$depart, \hyperlink{struct_coordonnee}{Coordonnee} arrivee)
+\begin{DoxyCompactList}\small\item\em renvoie le cout G entre un noeud et une position \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{noeud_8c_a33ba90b42cf1bdaefe9d24650a8cced9}{\index{noeud.\-c@{noeud.\-c}!construire\-\_\-noeud@{construire\-\_\-noeud}}
+\index{construire\-\_\-noeud@{construire\-\_\-noeud}!noeud.c@{noeud.\-c}}
+\subsubsection[{construire\-\_\-noeud}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Noeud} construire\-\_\-noeud (
+\begin{DoxyParamCaption}
+\item[{int}]{G, }
+\item[{int}]{H, }
+\item[{{\bf Coordonnee}}]{coordonnees}
+\end{DoxyParamCaption}
+)}}\label{noeud_8c_a33ba90b42cf1bdaefe9d24650a8cced9}
+
+
+construit un noeud de l'espace de jeu 
+
+
+\begin{DoxyParams}{Parameters}
+{\em G} & la valeur G \\
+\hline
+{\em H} & la valeur H \\
+\hline
+{\em coordonnees} & la coordonnée x/y sur la carte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un noeud de l'espace de jeu 
+\end{DoxyReturn}
+\hypertarget{noeud_8c_a936f004b840b6478b07aa56265e05da7}{\index{noeud.\-c@{noeud.\-c}!cout\-\_\-g@{cout\-\_\-g}}
+\index{cout\-\_\-g@{cout\-\_\-g}!noeud.c@{noeud.\-c}}
+\subsubsection[{cout\-\_\-g}]{\setlength{\rightskip}{0pt plus 5cm}int cout\-\_\-g (
+\begin{DoxyParamCaption}
+\item[{{\bf Noeud} $\ast$}]{depart, }
+\item[{{\bf Coordonnee}}]{arrivee}
+\end{DoxyParamCaption}
+)}}\label{noeud_8c_a936f004b840b6478b07aa56265e05da7}
+
+
+renvoie le cout G entre un noeud et une position 
+
+
+\begin{DoxyParams}{Parameters}
+{\em depart} & le noeud parent \\
+\hline
+{\em arrivee} & la coordonnée d'arrivée \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le G cherché 
+\end{DoxyReturn}

@@ -1,0 +1,95 @@
+\hypertarget{star_8h}{\section{header/star.h File Reference}
+\label{star_8h}\index{header/star.\-h@{header/star.\-h}}
+}
+{\ttfamily \#include $<$coordonnee.\-h$>$}\\*
+{\ttfamily \#include $<$noeud.\-h$>$}\\*
+{\ttfamily \#include $<$liste.\-h$>$}\\*
+{\ttfamily \#include $<$carte.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_star}{Star}
+\item 
+struct \hyperlink{struct_trajectoire}{Trajectoire}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct_star}{Star} \hyperlink{star_8h_aa1f3c94d8069fa32f73a20039ef1706a}{Star}
+\begin{DoxyCompactList}\small\item\em structure pour l'algorithme a étoile \end{DoxyCompactList}\item 
+typedef struct \hyperlink{struct_trajectoire}{Trajectoire} \hyperlink{star_8h_ae4d51326389019c47930ba698f4f15cb}{Trajectoire}
+\begin{DoxyCompactList}\small\item\em la \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_trajectoire}{Trajectoire} $\ast$ \hyperlink{star_8h_a113c98526000726a6d7fdf539ec76f32}{trouver\-\_\-chemin} (\hyperlink{struct_coordonnee}{Coordonnee} depart, \hyperlink{struct_coordonnee}{Coordonnee} fin, \hyperlink{struct_carte}{Carte} carte)
+\begin{DoxyCompactList}\small\item\em trouve le chemin le plus court entre deux points d'une carte \end{DoxyCompactList}\item 
+void \hyperlink{star_8h_a888da3687cbc96c9e75139b7ee98f2b0}{afficher\-\_\-chemin} (\hyperlink{struct_trajectoire}{Trajectoire} $\ast$chemin, \hyperlink{struct_carte}{Carte} carte, F\-I\-L\-E $\ast$output)
+\begin{DoxyCompactList}\small\item\em Affiche le chemin choisi dans un fichier texte. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{star_8h_aa1f3c94d8069fa32f73a20039ef1706a}{\index{star.\-h@{star.\-h}!Star@{Star}}
+\index{Star@{Star}!star.h@{star.\-h}}
+\subsubsection[{Star}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf Star} {\bf Star}}}\label{star_8h_aa1f3c94d8069fa32f73a20039ef1706a}
+
+
+structure pour l'algorithme a étoile 
+
+\hypertarget{star_8h_ae4d51326389019c47930ba698f4f15cb}{\index{star.\-h@{star.\-h}!Trajectoire@{Trajectoire}}
+\index{Trajectoire@{Trajectoire}!star.h@{star.\-h}}
+\subsubsection[{Trajectoire}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf Trajectoire} {\bf Trajectoire}}}\label{star_8h_ae4d51326389019c47930ba698f4f15cb}
+
+
+la 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{star_8h_a888da3687cbc96c9e75139b7ee98f2b0}{\index{star.\-h@{star.\-h}!afficher\-\_\-chemin@{afficher\-\_\-chemin}}
+\index{afficher\-\_\-chemin@{afficher\-\_\-chemin}!star.h@{star.\-h}}
+\subsubsection[{afficher\-\_\-chemin}]{\setlength{\rightskip}{0pt plus 5cm}void afficher\-\_\-chemin (
+\begin{DoxyParamCaption}
+\item[{{\bf Trajectoire} $\ast$}]{chemin, }
+\item[{{\bf Carte}}]{carte, }
+\item[{F\-I\-L\-E $\ast$}]{output}
+\end{DoxyParamCaption}
+)}}\label{star_8h_a888da3687cbc96c9e75139b7ee98f2b0}
+
+
+Affiche le chemin choisi dans un fichier texte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chemin} & le chemin a tracer \\
+\hline
+{\em carte} & la carte à sortir \\
+\hline
+{\em output} & le fichier de sortie \\
+\hline
+\end{DoxyParams}
+\hypertarget{star_8h_a113c98526000726a6d7fdf539ec76f32}{\index{star.\-h@{star.\-h}!trouver\-\_\-chemin@{trouver\-\_\-chemin}}
+\index{trouver\-\_\-chemin@{trouver\-\_\-chemin}!star.h@{star.\-h}}
+\subsubsection[{trouver\-\_\-chemin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Trajectoire}$\ast$ trouver\-\_\-chemin (
+\begin{DoxyParamCaption}
+\item[{{\bf Coordonnee}}]{depart, }
+\item[{{\bf Coordonnee}}]{fin, }
+\item[{{\bf Carte}}]{carte}
+\end{DoxyParamCaption}
+)}}\label{star_8h_a113c98526000726a6d7fdf539ec76f32}
+
+
+trouve le chemin le plus court entre deux points d'une carte 
+
+
+\begin{DoxyParams}{Parameters}
+{\em depart} & le point de départ \\
+\hline
+{\em fin} & le point d'arrivée \\
+\hline
+{\em carte} & la carte analysée \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une liste de coordonnées doublement chaînée 
+\end{DoxyReturn}

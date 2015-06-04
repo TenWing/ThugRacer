@@ -1,0 +1,338 @@
+\hypertarget{conduire_8h}{\section{header/conduire.h File Reference}
+\label{conduire_8h}\index{header/conduire.\-h@{header/conduire.\-h}}
+}
+{\ttfamily \#include $<$carte.\-h$>$}\\*
+{\ttfamily \#include $<$star.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_pilote}{Pilote}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct_pilote}{Pilote} \hyperlink{conduire_8h_a4a5d3803df848dc68426474b4ba27e44}{Pilote}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_pilote}{Pilote} \hyperlink{conduire_8h_a329e42231af2d1922441a11402a28008}{construire\-\_\-pilote} (F\-I\-L\-E $\ast$fichier)
+\begin{DoxyCompactList}\small\item\em construit le pilote de la tean Thugracer ! \end{DoxyCompactList}\item 
+void \hyperlink{conduire_8h_a4cf29c454a5fbca151c3c1279f6cedfd}{detruire\-\_\-pilote} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote)
+\begin{DoxyCompactList}\small\item\em detruit un pilote \end{DoxyCompactList}\item 
+void \hyperlink{conduire_8h_ab33841b65575ee8c161844efa444d839}{emplacement\-\_\-pilote} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote, F\-I\-L\-E $\ast$fichier)
+\begin{DoxyCompactList}\small\item\em initialise l'emplacement du pilote sur le circuit \end{DoxyCompactList}\item 
+int \hyperlink{conduire_8h_a729438aa333fe0d5a496a9c8ac95fd50}{determination\-\_\-position} (char $\ast$tab, int debut)
+\begin{DoxyCompactList}\small\item\em détermine la position du pilote \end{DoxyCompactList}\item 
+void \hyperlink{conduire_8h_aed242c5a4745cdfdc364dd427a991b64}{depart\-\_\-pilote} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote)
+\begin{DoxyCompactList}\small\item\em permet au pilote de partir au départ \end{DoxyCompactList}\item 
+int \hyperlink{conduire_8h_a4d2138386339960f3d7b6d4576714bb0}{determination\-\_\-direction} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote)
+\begin{DoxyCompactList}\small\item\em determine dans quelle direction doit aller le pilote \end{DoxyCompactList}\item 
+void \hyperlink{conduire_8h_a741e871ce04753785ece3977bf884a68}{rouler\-\_\-pilote} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote, \hyperlink{struct_coordonnee}{Coordonnee} coordonnee)
+\begin{DoxyCompactList}\small\item\em fonction principal du pilote \end{DoxyCompactList}\item 
+int \hyperlink{conduire_8h_abcd5e999eec288cb036957f16196879d}{delta\-Carburant\-Acceleration} (int acc\-X, int acc\-Y, int vel\-X, int vel\-Y, int dans\-Sable)
+\begin{DoxyCompactList}\small\item\em depense du carburant à un instant t \end{DoxyCompactList}\item 
+\hyperlink{struct_coordonnee}{Coordonnee} \hyperlink{conduire_8h_a49e3d605dea6b33946b54507922856ce}{get\-\_\-trajectoire\-\_\-coordonnee} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote, \hyperlink{struct_trajectoire}{Trajectoire} $\ast$trajectoire)
+\begin{DoxyCompactList}\small\item\em Recupere la coordonnée à aller de la trajectoire. \end{DoxyCompactList}\item 
+int \hyperlink{conduire_8h_a0f76aa8e3209cca0b52dc92fb6de2bc7}{vecteur\-\_\-vitesse} (int x, int y)
+\begin{DoxyCompactList}\small\item\em renvoie la norme du vecteur vitesse au carré \end{DoxyCompactList}\item 
+int \hyperlink{conduire_8h_a3bf664cfc554750e78a58ff7684c8cad}{distance} (\hyperlink{struct_coordonnee}{Coordonnee} point\-A, \hyperlink{struct_coordonnee}{Coordonnee} point\-B)
+\begin{DoxyCompactList}\small\item\em renvoie la distance entre deux points \end{DoxyCompactList}\item 
+int \hyperlink{conduire_8h_af082905f7eac6d03e92015146bbc1925}{max} (int a, int \hyperlink{jquery_8js_a2fa551895933fae935a0a6b87282241d}{b})
+\begin{DoxyCompactList}\small\item\em renvoie le max entre 2 entiers \end{DoxyCompactList}\item 
+\hyperlink{struct_coordonnee}{Coordonnee} \hyperlink{conduire_8h_a06650d3896af511718c6a7013cc6ca28}{recherche\-\_\-fin\-\_\-piste} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote)
+\begin{DoxyCompactList}\small\item\em recherche la fin de la piste \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Geliot \href{mailto:quentin.geliot@ecole.ensicaen.fr}{\tt quentin.\-geliot@ecole.\-ensicaen.\-fr} 
+
+Rakotondramasy \href{mailto:tendry.rakotondramasy@ecole.ensicaen.fr}{\tt tendry.\-rakotondramasy@ecole.\-ensicaen.\-fr} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\-0 -\/ 16/04/2015
+\end{DoxyVersion}
+Definitions des fonctions assurant le déplacement de la voiture de course 
+
+\subsection{Typedef Documentation}
+\hypertarget{conduire_8h_a4a5d3803df848dc68426474b4ba27e44}{\index{conduire.\-h@{conduire.\-h}!Pilote@{Pilote}}
+\index{Pilote@{Pilote}!conduire.h@{conduire.\-h}}
+\subsubsection[{Pilote}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf Pilote} {\bf Pilote}}}\label{conduire_8h_a4a5d3803df848dc68426474b4ba27e44}
+
+
+\subsection{Function Documentation}
+\hypertarget{conduire_8h_a329e42231af2d1922441a11402a28008}{\index{conduire.\-h@{conduire.\-h}!construire\-\_\-pilote@{construire\-\_\-pilote}}
+\index{construire\-\_\-pilote@{construire\-\_\-pilote}!conduire.h@{conduire.\-h}}
+\subsubsection[{construire\-\_\-pilote}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pilote} construire\-\_\-pilote (
+\begin{DoxyParamCaption}
+\item[{F\-I\-L\-E $\ast$}]{fichier}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_a329e42231af2d1922441a11402a28008}
+
+
+construit le pilote de la tean Thugracer ! 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fichier} & le fichier contenant les informations de la carte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le pilote construit 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_abcd5e999eec288cb036957f16196879d}{\index{conduire.\-h@{conduire.\-h}!delta\-Carburant\-Acceleration@{delta\-Carburant\-Acceleration}}
+\index{delta\-Carburant\-Acceleration@{delta\-Carburant\-Acceleration}!conduire.h@{conduire.\-h}}
+\subsubsection[{delta\-Carburant\-Acceleration}]{\setlength{\rightskip}{0pt plus 5cm}int delta\-Carburant\-Acceleration (
+\begin{DoxyParamCaption}
+\item[{int}]{acc\-X, }
+\item[{int}]{acc\-Y, }
+\item[{int}]{vel\-X, }
+\item[{int}]{vel\-Y, }
+\item[{int}]{dans\-Sable}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_abcd5e999eec288cb036957f16196879d}
+
+
+depense du carburant à un instant t 
+
+
+\begin{DoxyParams}{Parameters}
+{\em acc\-X} & acceleration selon l'abscisse \\
+\hline
+{\em acc\-Y} & acceleration selon l'ordonnée \\
+\hline
+{\em vel\-X} & vitesse selon l'abscisse \\
+\hline
+{\em vel\-Y} & vitesse selon l'ordonnée \\
+\hline
+{\em dans\-Sable} & permet une dépense plus importante du carburant si la voiture est dans le sable \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le carburant consommé à l'instant t 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_aed242c5a4745cdfdc364dd427a991b64}{\index{conduire.\-h@{conduire.\-h}!depart\-\_\-pilote@{depart\-\_\-pilote}}
+\index{depart\-\_\-pilote@{depart\-\_\-pilote}!conduire.h@{conduire.\-h}}
+\subsubsection[{depart\-\_\-pilote}]{\setlength{\rightskip}{0pt plus 5cm}void depart\-\_\-pilote (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_aed242c5a4745cdfdc364dd427a991b64}
+
+
+permet au pilote de partir au départ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la position au serveur 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_a4d2138386339960f3d7b6d4576714bb0}{\index{conduire.\-h@{conduire.\-h}!determination\-\_\-direction@{determination\-\_\-direction}}
+\index{determination\-\_\-direction@{determination\-\_\-direction}!conduire.h@{conduire.\-h}}
+\subsubsection[{determination\-\_\-direction}]{\setlength{\rightskip}{0pt plus 5cm}int determination\-\_\-direction (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_a4d2138386339960f3d7b6d4576714bb0}
+
+
+determine dans quelle direction doit aller le pilote 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un entier \-: correspondant à la direction où aller 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_a729438aa333fe0d5a496a9c8ac95fd50}{\index{conduire.\-h@{conduire.\-h}!determination\-\_\-position@{determination\-\_\-position}}
+\index{determination\-\_\-position@{determination\-\_\-position}!conduire.h@{conduire.\-h}}
+\subsubsection[{determination\-\_\-position}]{\setlength{\rightskip}{0pt plus 5cm}int determination\-\_\-position (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{tab, }
+\item[{int}]{debut}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_a729438aa333fe0d5a496a9c8ac95fd50}
+
+
+détermine la position du pilote 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tab} & le tableau ou figure les postiions à remettre en ordre \\
+\hline
+{\em debut} & indice du tableau \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la position 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_a4cf29c454a5fbca151c3c1279f6cedfd}{\index{conduire.\-h@{conduire.\-h}!detruire\-\_\-pilote@{detruire\-\_\-pilote}}
+\index{detruire\-\_\-pilote@{detruire\-\_\-pilote}!conduire.h@{conduire.\-h}}
+\subsubsection[{detruire\-\_\-pilote}]{\setlength{\rightskip}{0pt plus 5cm}void detruire\-\_\-pilote (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_a4cf29c454a5fbca151c3c1279f6cedfd}
+
+
+detruit un pilote 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \-: le pilote à détruire \\
+\hline
+\end{DoxyParams}
+\hypertarget{conduire_8h_a3bf664cfc554750e78a58ff7684c8cad}{\index{conduire.\-h@{conduire.\-h}!distance@{distance}}
+\index{distance@{distance}!conduire.h@{conduire.\-h}}
+\subsubsection[{distance}]{\setlength{\rightskip}{0pt plus 5cm}int distance (
+\begin{DoxyParamCaption}
+\item[{{\bf Coordonnee}}]{point\-A, }
+\item[{{\bf Coordonnee}}]{point\-B}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_a3bf664cfc554750e78a58ff7684c8cad}
+
+
+renvoie la distance entre deux points 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point\-A} & \\
+\hline
+{\em point\-B} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la distance 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_ab33841b65575ee8c161844efa444d839}{\index{conduire.\-h@{conduire.\-h}!emplacement\-\_\-pilote@{emplacement\-\_\-pilote}}
+\index{emplacement\-\_\-pilote@{emplacement\-\_\-pilote}!conduire.h@{conduire.\-h}}
+\subsubsection[{emplacement\-\_\-pilote}]{\setlength{\rightskip}{0pt plus 5cm}void emplacement\-\_\-pilote (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote, }
+\item[{F\-I\-L\-E $\ast$}]{fichier}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_ab33841b65575ee8c161844efa444d839}
+
+
+initialise l'emplacement du pilote sur le circuit 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \-: le pilote de la course \\
+\hline
+{\em fichier} & \-: le flux d'entrée \\
+\hline
+\end{DoxyParams}
+\hypertarget{conduire_8h_a49e3d605dea6b33946b54507922856ce}{\index{conduire.\-h@{conduire.\-h}!get\-\_\-trajectoire\-\_\-coordonnee@{get\-\_\-trajectoire\-\_\-coordonnee}}
+\index{get\-\_\-trajectoire\-\_\-coordonnee@{get\-\_\-trajectoire\-\_\-coordonnee}!conduire.h@{conduire.\-h}}
+\subsubsection[{get\-\_\-trajectoire\-\_\-coordonnee}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Coordonnee} get\-\_\-trajectoire\-\_\-coordonnee (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote, }
+\item[{{\bf Trajectoire} $\ast$}]{trajectoire}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_a49e3d605dea6b33946b54507922856ce}
+
+
+Recupere la coordonnée à aller de la trajectoire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & le pilote \\
+\hline
+{\em trajectoire} & la trajectoire \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la coordonnee à suivre 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_af082905f7eac6d03e92015146bbc1925}{\index{conduire.\-h@{conduire.\-h}!max@{max}}
+\index{max@{max}!conduire.h@{conduire.\-h}}
+\subsubsection[{max}]{\setlength{\rightskip}{0pt plus 5cm}int max (
+\begin{DoxyParamCaption}
+\item[{int}]{a, }
+\item[{int}]{b}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_af082905f7eac6d03e92015146bbc1925}
+
+
+renvoie le max entre 2 entiers 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \\
+\hline
+{\em b} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le max entre a et b 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_a06650d3896af511718c6a7013cc6ca28}{\index{conduire.\-h@{conduire.\-h}!recherche\-\_\-fin\-\_\-piste@{recherche\-\_\-fin\-\_\-piste}}
+\index{recherche\-\_\-fin\-\_\-piste@{recherche\-\_\-fin\-\_\-piste}!conduire.h@{conduire.\-h}}
+\subsubsection[{recherche\-\_\-fin\-\_\-piste}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Coordonnee} recherche\-\_\-fin\-\_\-piste (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_a06650d3896af511718c6a7013cc6ca28}
+
+
+recherche la fin de la piste 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la coordonnee de la fin de la piste 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_a741e871ce04753785ece3977bf884a68}{\index{conduire.\-h@{conduire.\-h}!rouler\-\_\-pilote@{rouler\-\_\-pilote}}
+\index{rouler\-\_\-pilote@{rouler\-\_\-pilote}!conduire.h@{conduire.\-h}}
+\subsubsection[{rouler\-\_\-pilote}]{\setlength{\rightskip}{0pt plus 5cm}void rouler\-\_\-pilote (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote, }
+\item[{{\bf Coordonnee}}]{coordonnee}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_a741e871ce04753785ece3977bf884a68}
+
+
+fonction principal du pilote 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \\
+\hline
+{\em trajectoire} & \-: la trajectoire idéale à suivre par le pilote \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\-: les informations à envoyer au serveur 
+\end{DoxyReturn}
+\hypertarget{conduire_8h_a0f76aa8e3209cca0b52dc92fb6de2bc7}{\index{conduire.\-h@{conduire.\-h}!vecteur\-\_\-vitesse@{vecteur\-\_\-vitesse}}
+\index{vecteur\-\_\-vitesse@{vecteur\-\_\-vitesse}!conduire.h@{conduire.\-h}}
+\subsubsection[{vecteur\-\_\-vitesse}]{\setlength{\rightskip}{0pt plus 5cm}int vecteur\-\_\-vitesse (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{conduire_8h_a0f76aa8e3209cca0b52dc92fb6de2bc7}
+
+
+renvoie la norme du vecteur vitesse au carré 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & la coordonnée x du vecteur de vitesse \\
+\hline
+{\em y} & la coordonnée y du vecteur vitesse \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la noooorme² 
+\end{DoxyReturn}

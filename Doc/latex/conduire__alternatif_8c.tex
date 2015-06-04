@@ -1,0 +1,244 @@
+\hypertarget{conduire__alternatif_8c}{\section{source/v2/conduire\-\_\-alternatif.c File Reference}
+\label{conduire__alternatif_8c}\index{source/v2/conduire\-\_\-alternatif.\-c@{source/v2/conduire\-\_\-alternatif.\-c}}
+}
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$conduire.\-h$>$}\\*
+{\ttfamily \#include $<$conduire\-\_\-alternatif.\-h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_coordonnee}{Coordonnee} \hyperlink{conduire__alternatif_8c_a5ed61c740cd421f72b784e664ed3438f}{vecteur\-\_\-direction} (\hyperlink{conduire__alternatif_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction} direction)
+\begin{DoxyCompactList}\small\item\em renvoie un vecteur associé à une direction \end{DoxyCompactList}\item 
+\hyperlink{conduire__alternatif_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction} \hyperlink{conduire__alternatif_8c_a890223e9bfb340de553029445948c289}{direction\-\_\-vecteur} (\hyperlink{struct_coordonnee}{Coordonnee} sens)
+\begin{DoxyCompactList}\small\item\em renvoie la direction associée à un vecteur \end{DoxyCompactList}\item 
+\hyperlink{struct_coordonnee}{Coordonnee} \hyperlink{conduire__alternatif_8c_a1a1405d3754e5e22d0e0d5838f856846}{vecteur\-\_\-inverse} (\hyperlink{struct_coordonnee}{Coordonnee} coordonnee)
+\begin{DoxyCompactList}\small\item\em calcule le vecteur inverse de celui-\/donné \end{DoxyCompactList}\item 
+\hyperlink{struct_virage}{Virage} $\ast$ \hyperlink{conduire__alternatif_8c_a932f2dd1ac34ce9695b13616a8a10e0c}{construire\-\_\-virages} (\hyperlink{struct_trajectoire}{Trajectoire} $\ast$trajectoire, \hyperlink{struct_carte}{Carte} carte)
+\begin{DoxyCompactList}\small\item\em Construit une liste de virages à partir d'une trajectoire. \end{DoxyCompactList}\item 
+void \hyperlink{conduire__alternatif_8c_a1db946bdf3ad08a19637748aeff751a5}{construire\-\_\-rayon} (\hyperlink{struct_virage}{Virage} $\ast$virage, \hyperlink{struct_trajectoire}{Trajectoire} $\ast$trajectoire, \hyperlink{struct_carte}{Carte} carte)
+\begin{DoxyCompactList}\small\item\em Construit la portée d'action du virage. \end{DoxyCompactList}\item 
+int \hyperlink{conduire__alternatif_8c_ad962c33170432d5d5f688bacdd716a6e}{dans\-\_\-virage} (\hyperlink{struct_coordonnee}{Coordonnee} estimee, \hyperlink{struct_virage}{Virage} $\ast$virage)
+\begin{DoxyCompactList}\small\item\em Regarde si le pilote a passé la ligne de virage et doit donc amorcer celui-\/ci ou non. \end{DoxyCompactList}\item 
+void \hyperlink{conduire__alternatif_8c_aa8d993080ecdd426ab80fd39f5ef67cb}{freiner} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote)
+\begin{DoxyCompactList}\small\item\em Fait freiner le pilote (avec un vecteur) \end{DoxyCompactList}\item 
+void \hyperlink{conduire__alternatif_8c_aaaaa928d2a95399e38eecf113ac26c1d}{tourner} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote, \hyperlink{struct_virage}{Virage} $\ast$virage)
+\begin{DoxyCompactList}\small\item\em fait tourner le pilote \end{DoxyCompactList}\item 
+void \hyperlink{conduire__alternatif_8c_a7d9c90af99c277e551b11ec137366efb}{tout\-\_\-droit} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote)
+\begin{DoxyCompactList}\small\item\em fait aller le pilote tout droit par rapport à son état \end{DoxyCompactList}\item 
+void \hyperlink{conduire__alternatif_8c_aff691e5321ae89aa2bb707381b722fd7}{demarre} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote)
+\begin{DoxyCompactList}\small\item\em démaaaaaaaaaaaaaaaaaaaaaaarre \end{DoxyCompactList}\item 
+void \hyperlink{conduire__alternatif_8c_a0ff83688587aa50696a53c0d857df7fa}{piloter} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote, \hyperlink{struct_virage}{Virage} $\ast$virage)
+\begin{DoxyCompactList}\small\item\em fait piloter le pilote \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{conduire__alternatif_8c_a1db946bdf3ad08a19637748aeff751a5}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!construire\-\_\-rayon@{construire\-\_\-rayon}}
+\index{construire\-\_\-rayon@{construire\-\_\-rayon}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{construire\-\_\-rayon}]{\setlength{\rightskip}{0pt plus 5cm}void construire\-\_\-rayon (
+\begin{DoxyParamCaption}
+\item[{{\bf Virage} $\ast$}]{virage, }
+\item[{{\bf Trajectoire} $\ast$}]{trajectoire, }
+\item[{{\bf Carte}}]{carte}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_a1db946bdf3ad08a19637748aeff751a5}
+
+
+Construit la portée d'action du virage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em virage} & le virage modifié \\
+\hline
+{\em trajectoire} & le noeud d'action de la trajectoire \\
+\hline
+{\em carte} & la piste de jeu \\
+\hline
+\end{DoxyParams}
+\hypertarget{conduire__alternatif_8c_a932f2dd1ac34ce9695b13616a8a10e0c}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!construire\-\_\-virages@{construire\-\_\-virages}}
+\index{construire\-\_\-virages@{construire\-\_\-virages}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{construire\-\_\-virages}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Virage}$\ast$ construire\-\_\-virages (
+\begin{DoxyParamCaption}
+\item[{{\bf Trajectoire} $\ast$}]{trajectoire, }
+\item[{{\bf Carte}}]{carte}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_a932f2dd1ac34ce9695b13616a8a10e0c}
+
+
+Construit une liste de virages à partir d'une trajectoire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em trajectoire} & la trajectoire \\
+\hline
+{\em carte} & la carte du jeu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une liste de virages 
+\end{DoxyReturn}
+\hypertarget{conduire__alternatif_8c_ad962c33170432d5d5f688bacdd716a6e}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!dans\-\_\-virage@{dans\-\_\-virage}}
+\index{dans\-\_\-virage@{dans\-\_\-virage}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{dans\-\_\-virage}]{\setlength{\rightskip}{0pt plus 5cm}int dans\-\_\-virage (
+\begin{DoxyParamCaption}
+\item[{{\bf Coordonnee}}]{estimee, }
+\item[{{\bf Virage} $\ast$}]{virage}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_ad962c33170432d5d5f688bacdd716a6e}
+
+
+Regarde si le pilote a passé la ligne de virage et doit donc amorcer celui-\/ci ou non. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em estimee} & la coordonnée estimée du prochain tour \\
+\hline
+{\em virage} & le virage \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+oui ou non 
+\end{DoxyReturn}
+\hypertarget{conduire__alternatif_8c_aff691e5321ae89aa2bb707381b722fd7}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!demarre@{demarre}}
+\index{demarre@{demarre}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{demarre}]{\setlength{\rightskip}{0pt plus 5cm}void demarre (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_aff691e5321ae89aa2bb707381b722fd7}
+
+
+démaaaaaaaaaaaaaaaaaaaaaaarre 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & le pilote \\
+\hline
+\end{DoxyParams}
+\hypertarget{conduire__alternatif_8c_a890223e9bfb340de553029445948c289}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!direction\-\_\-vecteur@{direction\-\_\-vecteur}}
+\index{direction\-\_\-vecteur@{direction\-\_\-vecteur}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{direction\-\_\-vecteur}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Direction} direction\-\_\-vecteur (
+\begin{DoxyParamCaption}
+\item[{{\bf Coordonnee}}]{coordonnee}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_a890223e9bfb340de553029445948c289}
+
+
+renvoie la direction associée à un vecteur 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coordonnee} & le vecteur testé \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la direction (enum) 
+\end{DoxyReturn}
+\hypertarget{conduire__alternatif_8c_aa8d993080ecdd426ab80fd39f5ef67cb}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!freiner@{freiner}}
+\index{freiner@{freiner}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{freiner}]{\setlength{\rightskip}{0pt plus 5cm}void freiner (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_aa8d993080ecdd426ab80fd39f5ef67cb}
+
+
+Fait freiner le pilote (avec un vecteur) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & le pilote \\
+\hline
+\end{DoxyParams}
+\hypertarget{conduire__alternatif_8c_a0ff83688587aa50696a53c0d857df7fa}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!piloter@{piloter}}
+\index{piloter@{piloter}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{piloter}]{\setlength{\rightskip}{0pt plus 5cm}void piloter (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote, }
+\item[{{\bf Virage} $\ast$}]{virage}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_a0ff83688587aa50696a53c0d857df7fa}
+
+
+fait piloter le pilote 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & le pilote \\
+\hline
+{\em virage} & la liste des virages \\
+\hline
+\end{DoxyParams}
+\hypertarget{conduire__alternatif_8c_aaaaa928d2a95399e38eecf113ac26c1d}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!tourner@{tourner}}
+\index{tourner@{tourner}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{tourner}]{\setlength{\rightskip}{0pt plus 5cm}void tourner (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote, }
+\item[{{\bf Virage} $\ast$}]{virage}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_aaaaa928d2a95399e38eecf113ac26c1d}
+
+
+fait tourner le pilote 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & le pilote qui doit tourner \\
+\hline
+{\em virage} & le virage à négocier \\
+\hline
+\end{DoxyParams}
+\hypertarget{conduire__alternatif_8c_a7d9c90af99c277e551b11ec137366efb}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!tout\-\_\-droit@{tout\-\_\-droit}}
+\index{tout\-\_\-droit@{tout\-\_\-droit}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{tout\-\_\-droit}]{\setlength{\rightskip}{0pt plus 5cm}void tout\-\_\-droit (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_a7d9c90af99c277e551b11ec137366efb}
+
+
+fait aller le pilote tout droit par rapport à son état 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & le pilote modifié \\
+\hline
+\end{DoxyParams}
+\hypertarget{conduire__alternatif_8c_a5ed61c740cd421f72b784e664ed3438f}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!vecteur\-\_\-direction@{vecteur\-\_\-direction}}
+\index{vecteur\-\_\-direction@{vecteur\-\_\-direction}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{vecteur\-\_\-direction}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Coordonnee} vecteur\-\_\-direction (
+\begin{DoxyParamCaption}
+\item[{{\bf Direction}}]{direction}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_a5ed61c740cd421f72b784e664ed3438f}
+
+
+renvoie un vecteur associé à une direction 
+
+
+\begin{DoxyParams}{Parameters}
+{\em direction} & la direction voulue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le vecteur x et y 
+\end{DoxyReturn}
+\hypertarget{conduire__alternatif_8c_a1a1405d3754e5e22d0e0d5838f856846}{\index{conduire\-\_\-alternatif.\-c@{conduire\-\_\-alternatif.\-c}!vecteur\-\_\-inverse@{vecteur\-\_\-inverse}}
+\index{vecteur\-\_\-inverse@{vecteur\-\_\-inverse}!conduire_alternatif.c@{conduire\-\_\-alternatif.\-c}}
+\subsubsection[{vecteur\-\_\-inverse}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Coordonnee} vecteur\-\_\-inverse (
+\begin{DoxyParamCaption}
+\item[{{\bf Coordonnee}}]{coordonnee}
+\end{DoxyParamCaption}
+)}}\label{conduire__alternatif_8c_a1a1405d3754e5e22d0e0d5838f856846}
+
+
+calcule le vecteur inverse de celui-\/donné 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coordonnee} & le vecteur à inverser \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le vecteur inverse 
+\end{DoxyReturn}

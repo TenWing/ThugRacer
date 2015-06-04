@@ -1,0 +1,115 @@
+\hypertarget{liste_8h}{\section{header/liste.h File Reference}
+\label{liste_8h}\index{header/liste.\-h@{header/liste.\-h}}
+}
+{\ttfamily \#include $<$noeud.\-h$>$}\\*
+{\ttfamily \#include $<$coordonnee.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_liste}{Liste}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct_liste}{Liste} \hyperlink{liste_8h_a557ef71c084c1e9ac14d935ce948fcc5}{Liste}
+\begin{DoxyCompactList}\small\item\em l'open list de l'algorithme A$\ast$ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_liste}{Liste} \hyperlink{liste_8h_abf9df2c8fa76bb2cd168e39fb4693627}{construire\-\_\-liste} (int taille\-Max)
+\begin{DoxyCompactList}\small\item\em construit une liste avec la taille maximale de celle-\/ci \end{DoxyCompactList}\item 
+void \hyperlink{liste_8h_ac02c64a3354eef24c629d1d6d33c7e1e}{ajouter} (\hyperlink{struct_liste}{Liste} $\ast$liste, \hyperlink{struct_noeud}{Noeud} $\ast$noeud)
+\begin{DoxyCompactList}\small\item\em ajoute un noeud dans l'open list \end{DoxyCompactList}\item 
+void \hyperlink{liste_8h_a534310ada08fd60e0b33060e98ae29e9}{supprimer\-\_\-sommet} (\hyperlink{struct_liste}{Liste} $\ast$liste)
+\begin{DoxyCompactList}\small\item\em supprime le sommet ré-\/arrange l'open list \end{DoxyCompactList}\item 
+void \hyperlink{liste_8h_aff0bcb526bfff56bd85e204f2a75fba3}{mise\-\_\-a\-\_\-jour} (\hyperlink{struct_liste}{Liste} $\ast$liste, int id, int new\-F)
+\begin{DoxyCompactList}\small\item\em modifie la valeur de F d'un noeud et ré-\/arrange l'arbre \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{liste_8h_a557ef71c084c1e9ac14d935ce948fcc5}{\index{liste.\-h@{liste.\-h}!Liste@{Liste}}
+\index{Liste@{Liste}!liste.h@{liste.\-h}}
+\subsubsection[{Liste}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf Liste} {\bf Liste}}}\label{liste_8h_a557ef71c084c1e9ac14d935ce948fcc5}
+
+
+l'open list de l'algorithme A$\ast$ 
+
+
+
+\subsection{Function Documentation}
+\hypertarget{liste_8h_ac02c64a3354eef24c629d1d6d33c7e1e}{\index{liste.\-h@{liste.\-h}!ajouter@{ajouter}}
+\index{ajouter@{ajouter}!liste.h@{liste.\-h}}
+\subsubsection[{ajouter}]{\setlength{\rightskip}{0pt plus 5cm}void ajouter (
+\begin{DoxyParamCaption}
+\item[{{\bf Liste} $\ast$}]{liste, }
+\item[{{\bf Noeud} $\ast$}]{noeud}
+\end{DoxyParamCaption}
+)}}\label{liste_8h_ac02c64a3354eef24c629d1d6d33c7e1e}
+
+
+ajoute un noeud dans l'open list 
+
+
+\begin{DoxyParams}{Parameters}
+{\em liste} & la liste modifiée \\
+\hline
+{\em noeud} & le noeud à ajouter \\
+\hline
+\end{DoxyParams}
+\hypertarget{liste_8h_abf9df2c8fa76bb2cd168e39fb4693627}{\index{liste.\-h@{liste.\-h}!construire\-\_\-liste@{construire\-\_\-liste}}
+\index{construire\-\_\-liste@{construire\-\_\-liste}!liste.h@{liste.\-h}}
+\subsubsection[{construire\-\_\-liste}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Liste} construire\-\_\-liste (
+\begin{DoxyParamCaption}
+\item[{int}]{taille\-Max}
+\end{DoxyParamCaption}
+)}}\label{liste_8h_abf9df2c8fa76bb2cd168e39fb4693627}
+
+
+construit une liste avec la taille maximale de celle-\/ci 
+
+
+\begin{DoxyParams}{Parameters}
+{\em taille\-Max} & la taille max \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une liste 
+\end{DoxyReturn}
+\hypertarget{liste_8h_aff0bcb526bfff56bd85e204f2a75fba3}{\index{liste.\-h@{liste.\-h}!mise\-\_\-a\-\_\-jour@{mise\-\_\-a\-\_\-jour}}
+\index{mise\-\_\-a\-\_\-jour@{mise\-\_\-a\-\_\-jour}!liste.h@{liste.\-h}}
+\subsubsection[{mise\-\_\-a\-\_\-jour}]{\setlength{\rightskip}{0pt plus 5cm}void mise\-\_\-a\-\_\-jour (
+\begin{DoxyParamCaption}
+\item[{{\bf Liste} $\ast$}]{liste, }
+\item[{int}]{id, }
+\item[{int}]{new\-F}
+\end{DoxyParamCaption}
+)}}\label{liste_8h_aff0bcb526bfff56bd85e204f2a75fba3}
+
+
+modifie la valeur de F d'un noeud et ré-\/arrange l'arbre 
+
+
+\begin{DoxyParams}{Parameters}
+{\em liste} & la liste modifiée \\
+\hline
+{\em id} & l'id du noeud modifié \\
+\hline
+{\em new\-F} & la nouvelle valeur F du noeud \\
+\hline
+\end{DoxyParams}
+\hypertarget{liste_8h_a534310ada08fd60e0b33060e98ae29e9}{\index{liste.\-h@{liste.\-h}!supprimer\-\_\-sommet@{supprimer\-\_\-sommet}}
+\index{supprimer\-\_\-sommet@{supprimer\-\_\-sommet}!liste.h@{liste.\-h}}
+\subsubsection[{supprimer\-\_\-sommet}]{\setlength{\rightskip}{0pt plus 5cm}void supprimer\-\_\-sommet (
+\begin{DoxyParamCaption}
+\item[{{\bf Liste} $\ast$}]{liste}
+\end{DoxyParamCaption}
+)}}\label{liste_8h_a534310ada08fd60e0b33060e98ae29e9}
+
+
+supprime le sommet ré-\/arrange l'open list 
+
+
+\begin{DoxyParams}{Parameters}
+{\em liste} & la liste modifiée \\
+\hline
+\end{DoxyParams}

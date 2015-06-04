@@ -1,0 +1,155 @@
+\hypertarget{piloter_8h}{\section{header/piloter.h File Reference}
+\label{piloter_8h}\index{header/piloter.\-h@{header/piloter.\-h}}
+}
+{\ttfamily \#include $<$coordonnee.\-h$>$}\\*
+{\ttfamily \#include $<$star.\-h$>$}\\*
+{\ttfamily \#include $<$conduire.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_checkpoint}{Checkpoint}
+\begin{DoxyCompactList}\small\item\em structure d'un virage \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct_checkpoint}{Checkpoint} \hyperlink{piloter_8h_af9fd1a802413aebc6d1bdd82cb3b5d1b}{Checkpoint}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_checkpoint}{Checkpoint} $\ast$ \hyperlink{piloter_8h_ac20d8b27373e67678485de9732a110b6}{construire\-\_\-checkpoints} (\hyperlink{struct_trajectoire}{Trajectoire} $\ast$trajectoire)
+\begin{DoxyCompactList}\small\item\em construire une liste de checkpoint \end{DoxyCompactList}\item 
+void \hyperlink{piloter_8h_ac1089e81132990f0a14cbf7ed257d61f}{affiche\-\_\-checkpoints} (\hyperlink{struct_checkpoint}{Checkpoint} $\ast$checkpoint)
+\begin{DoxyCompactList}\small\item\em affiche la liste des checkpoints dans un fichier texte \end{DoxyCompactList}\item 
+void \hyperlink{piloter_8h_adb8d3388665b0d14a362d30e196d5d51}{update\-\_\-pilote} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote)
+\begin{DoxyCompactList}\small\item\em met à jour les données du pilote venant du serveur \end{DoxyCompactList}\item 
+void \hyperlink{piloter_8h_af1763d6c17e44cdaae5c7988d0919deb}{rouler} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote, \hyperlink{struct_checkpoint}{Checkpoint} $\ast$checkpoint)
+\begin{DoxyCompactList}\small\item\em fonction principal du pilote \end{DoxyCompactList}\item 
+void \hyperlink{piloter_8h_a549692efc7515ec7ff6959e441fb3285}{aller\-\_\-au\-\_\-prochaint\-\_\-point} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote, \hyperlink{struct_coordonnee}{Coordonnee} coordonnee)
+\begin{DoxyCompactList}\small\item\em fonction déplaçant le pilote de façon linéaire \end{DoxyCompactList}\item 
+void \hyperlink{piloter_8h_a4e52ede53018f3bd05aece7717f2ecc9}{ralentir} (\hyperlink{struct_pilote}{Pilote} $\ast$pilote)
+\begin{DoxyCompactList}\small\item\em fait ralentir le pilote pour la négociation du virage \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{piloter_8h_af9fd1a802413aebc6d1bdd82cb3b5d1b}{\index{piloter.\-h@{piloter.\-h}!Checkpoint@{Checkpoint}}
+\index{Checkpoint@{Checkpoint}!piloter.h@{piloter.\-h}}
+\subsubsection[{Checkpoint}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf Checkpoint} {\bf Checkpoint}}}\label{piloter_8h_af9fd1a802413aebc6d1bdd82cb3b5d1b}
+\begin{DoxyAuthor}{Author}
+Geliot \href{mailto:quentin.geliot@ecole.ensicaen.fr}{\tt quentin.\-geliot@ecole.\-ensicaen.\-fr} 
+
+Rakotondramasy \href{mailto:tendry.rakotondramasy@ecole.ensicaen.fr}{\tt tendry.\-rakotondramasy@ecole.\-ensicaen.\-fr} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\-0 -\/ 4/06/2015 
+\end{DoxyVersion}
+
+
+\subsection{Function Documentation}
+\hypertarget{piloter_8h_ac1089e81132990f0a14cbf7ed257d61f}{\index{piloter.\-h@{piloter.\-h}!affiche\-\_\-checkpoints@{affiche\-\_\-checkpoints}}
+\index{affiche\-\_\-checkpoints@{affiche\-\_\-checkpoints}!piloter.h@{piloter.\-h}}
+\subsubsection[{affiche\-\_\-checkpoints}]{\setlength{\rightskip}{0pt plus 5cm}void affiche\-\_\-checkpoints (
+\begin{DoxyParamCaption}
+\item[{{\bf Checkpoint} $\ast$}]{checkpoint}
+\end{DoxyParamCaption}
+)}}\label{piloter_8h_ac1089e81132990f0a14cbf7ed257d61f}
+
+
+affiche la liste des checkpoints dans un fichier texte 
+
+
+\begin{DoxyParams}{Parameters}
+{\em checkpoint} & la liste des checkpoints \\
+\hline
+\end{DoxyParams}
+\hypertarget{piloter_8h_a549692efc7515ec7ff6959e441fb3285}{\index{piloter.\-h@{piloter.\-h}!aller\-\_\-au\-\_\-prochaint\-\_\-point@{aller\-\_\-au\-\_\-prochaint\-\_\-point}}
+\index{aller\-\_\-au\-\_\-prochaint\-\_\-point@{aller\-\_\-au\-\_\-prochaint\-\_\-point}!piloter.h@{piloter.\-h}}
+\subsubsection[{aller\-\_\-au\-\_\-prochaint\-\_\-point}]{\setlength{\rightskip}{0pt plus 5cm}void aller\-\_\-au\-\_\-prochaint\-\_\-point (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote, }
+\item[{{\bf Coordonnee}}]{coordonnee}
+\end{DoxyParamCaption}
+)}}\label{piloter_8h_a549692efc7515ec7ff6959e441fb3285}
+
+
+fonction déplaçant le pilote de façon linéaire 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \\
+\hline
+{\em coordonnee} & la coordonnée à atteindre \\
+\hline
+\end{DoxyParams}
+\hypertarget{piloter_8h_ac20d8b27373e67678485de9732a110b6}{\index{piloter.\-h@{piloter.\-h}!construire\-\_\-checkpoints@{construire\-\_\-checkpoints}}
+\index{construire\-\_\-checkpoints@{construire\-\_\-checkpoints}!piloter.h@{piloter.\-h}}
+\subsubsection[{construire\-\_\-checkpoints}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Checkpoint}$\ast$ construire\-\_\-checkpoints (
+\begin{DoxyParamCaption}
+\item[{{\bf Trajectoire} $\ast$}]{trajectoire}
+\end{DoxyParamCaption}
+)}}\label{piloter_8h_ac20d8b27373e67678485de9732a110b6}
+
+
+construire une liste de checkpoint 
+
+
+\begin{DoxyParams}{Parameters}
+{\em trajectoire} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la liste des checkpoints 
+\end{DoxyReturn}
+\hypertarget{piloter_8h_a4e52ede53018f3bd05aece7717f2ecc9}{\index{piloter.\-h@{piloter.\-h}!ralentir@{ralentir}}
+\index{ralentir@{ralentir}!piloter.h@{piloter.\-h}}
+\subsubsection[{ralentir}]{\setlength{\rightskip}{0pt plus 5cm}void ralentir (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote}
+\end{DoxyParamCaption}
+)}}\label{piloter_8h_a4e52ede53018f3bd05aece7717f2ecc9}
+
+
+fait ralentir le pilote pour la négociation du virage 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \mbox{[}description\mbox{]} \\
+\hline
+\end{DoxyParams}
+\hypertarget{piloter_8h_af1763d6c17e44cdaae5c7988d0919deb}{\index{piloter.\-h@{piloter.\-h}!rouler@{rouler}}
+\index{rouler@{rouler}!piloter.h@{piloter.\-h}}
+\subsubsection[{rouler}]{\setlength{\rightskip}{0pt plus 5cm}void rouler (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote, }
+\item[{{\bf Checkpoint} $\ast$}]{checkpoint}
+\end{DoxyParamCaption}
+)}}\label{piloter_8h_af1763d6c17e44cdaae5c7988d0919deb}
+
+
+fonction principal du pilote 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \\
+\hline
+{\em checkpoint} & la liste des checkpoints \\
+\hline
+\end{DoxyParams}
+\hypertarget{piloter_8h_adb8d3388665b0d14a362d30e196d5d51}{\index{piloter.\-h@{piloter.\-h}!update\-\_\-pilote@{update\-\_\-pilote}}
+\index{update\-\_\-pilote@{update\-\_\-pilote}!piloter.h@{piloter.\-h}}
+\subsubsection[{update\-\_\-pilote}]{\setlength{\rightskip}{0pt plus 5cm}void update\-\_\-pilote (
+\begin{DoxyParamCaption}
+\item[{{\bf Pilote} $\ast$}]{pilote}
+\end{DoxyParamCaption}
+)}}\label{piloter_8h_adb8d3388665b0d14a362d30e196d5d51}
+
+
+met à jour les données du pilote venant du serveur 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pilote} & \\
+\hline
+\end{DoxyParams}
