@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <carte.h>
-#include <conduire.h>
+#include <conduire_naif.h>
 #include <math.h>
 #include <star.h>
 

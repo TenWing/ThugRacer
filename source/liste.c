@@ -121,7 +121,7 @@ void mise_a_jour(Liste* liste, int id, int newF)
 		index /= 2;
 	}
 }
-
+/*
 void affiche_liste(Liste* liste, FILE* output)
 {
 	int i = 0;
@@ -132,4 +132,4 @@ void affiche_liste(Liste* liste, FILE* output)
 		fprintf(output, "(%d=>%d[%d %d]) ", liste->ids[i], liste->coutF[liste->ids[i]], liste->coordonnees[liste->ids[i]].x, liste->coordonnees[liste->ids[i]].y);
 	}
 	fprintf(output, "\n");
-}
+}*/

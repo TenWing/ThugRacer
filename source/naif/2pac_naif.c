@@ -33,21 +33,9 @@ int main(int argc, char const *argv[]) {
 	dep.x = pilote.coordonnee_map.x; 
 	dep.y = pilote.coordonnee_map.y;
 
-	for(i=0;i<pilote.carte.tailleX;i++)
-	{
-		for(j=0;j<pilote.carte.tailleY;j++)
-		{
-			if(pilote.carte.matrice[i][j] == '=')
-			{
-				end.x = i; 
-				end.y = j;
-			}
-		}
-	}
+	end = recherche_fin_piste(&pilote);
 
 	trajectoire = trouver_chemin(dep, end, pilote.carte);
-
-	// afficher_chemin(trajectoire, pilote.carte, info);
 
 	depart_pilote(&pilote);
 

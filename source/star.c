@@ -37,7 +37,7 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 	}
 
 	// Initialisation ajout du noeud de départ
-	node = construire_noeud(0, (fabs(depart.x - fin.x)+fabs(depart.y - fin.y))*10, depart);
+	node = construire_noeud(0, (abs(depart.x - fin.x)+abs(depart.y - fin.y))*10, depart);
 	toInit = (Noeud*) malloc(sizeof(Noeud));
 	*toInit = node;
 	ajouter(&(star.openList), toInit);
@@ -81,7 +81,7 @@ Trajectoire* trouver_chemin(Coordonnee depart, Coordonnee fin, Carte carte)
 					if(star.noeuds[i][j] == NULL)
 					{
 						coordInit.x = i; coordInit.y = j;
-						node = construire_noeud(cout_g(toStore, coordInit), (fabs(i - fin.x)+fabs(j - fin.y))*10, coordInit);
+						node = construire_noeud(cout_g(toStore, coordInit), (abs(i - fin.x)+abs(j - fin.y))*10, coordInit);
 						toInit = malloc(sizeof(Noeud));
 						*toInit = node;
 						star.noeuds[i][j] = toInit;

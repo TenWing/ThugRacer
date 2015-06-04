@@ -54,9 +54,21 @@ typedef struct Pilote
 	Coordonnee coordonnee_trajectoire;
 
 	/**
+	 * @brief coordonnee_arrivée : les coordonnées de la ligne d'arrivée
+	 */
+	Coordonnee ligne_arrivee;
+
+	/**
+	 * @brief  nb_boost
+	 */
+	int nb_boost;
+
+	/**
 	 * @brief  carte : la carte du circuit
 	 */
 	Carte carte;
+
+
 
 }Pilote;
 

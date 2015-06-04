@@ -11,6 +11,7 @@
 export EXEC=2pac
 export EXEC2=3pac
 export EXEC3=2pac_naif
+export EXEC4 = 2pac_naif_2.0
 ##############################
 ##/////////////////////////////////////////////////
 
@@ -40,7 +41,8 @@ export RUN_DIR= output
 export LDFLAGS=-I header -lm
 
 #Le dossier de stockage des pilotes de la course 
-export DRIVER_DIR=../drivers
+#export DRIVER_DIR=output
+export DRIVER_DIR=../GrandPrixCarburant/drivers
 
 ##############################
 #Fichiers à compiler
@@ -58,7 +60,9 @@ export HDRS=$(wildcard $(HEADER_DIR)/*.h);
 ##############################
 
 #Construction de l'exécutable
-all: 								$(RUN_DIR)/$(EXEC)
+all: 								$(RUN_DIR)/$(EXEC) $(RUN_DIR)/$(EXEC2) $(RUN_DIR)/$(EXEC3) $(RUN_DIR)/$(EXEC4)
+
+patch_all:							patch_gp patch_gp_v2 patch_gp_naif patch_gp_naif_2.0
 
 #On va créer les .o pour faire le likage
 $(RUN_DIR)/$(EXEC):					$(OBJ)
@@ -98,7 +102,7 @@ v2:									$(RUN_DIR)/$(EXEC2)
 source/v2/3pac.o: 					source/v2/3pac.c
 									@$(CC) -o $@ -c $^ $(CFLAGS) $(LDFLAGS)
 
-source/v2/conduire_alternatif.o: 	source/conduire_alternatif.c
+source/v2/conduire_alternatif.o: 	source/v2/conduire_alternatif.c
 									@$(CC) -o $@ -c $^ $(CFLAGS) $(LDFLAGS)
 
 $(RUN_DIR)/$(EXEC2):				$(BUILD_DIR)/$(SOURCE_DIR)/carte.o $(BUILD_DIR)/$(SOURCE_DIR)/conduire.o $(BUILD_DIR)/$(SOURCE_DIR)/liste.o $(BUILD_DIR)/$(SOURCE_DIR)/noeud.o $(BUILD_DIR)/$(SOURCE_DIR)/star.o source/v2/conduire_alternatif.o source/v2/3pac.o
@@ -121,7 +125,22 @@ source/naif/conduire_naif.o:	 	source/naif/conduire_naif.c
 $(RUN_DIR)/$(EXEC3):				$(BUILD_DIR)/$(SOURCE_DIR)/carte.o $(BUILD_DIR)/$(SOURCE_DIR)/liste.o $(BUILD_DIR)/$(SOURCE_DIR)/noeud.o $(BUILD_DIR)/$(SOURCE_DIR)/star.o source/naif/conduire_naif.o source/naif/2pac_naif.o 
 									$(CC) -o $@ $^ $(LDFLAGS)
 
+###########################################################################
+patch_gp_naif_2.0:
+									@echo "Ajout de 2pac_naif_2.0 aux pilotes"
+									@rm -rf $(DRIVER_DIR)/$(EXEC4)
+									@cp $(RUN_DIR)/$(EXEC4) $(DRIVER_DIR)
 
+naif_2.0:							$(RUN_DIR)/$(EXEC4)
+
+source/naif_2.0/2pac_naif_2.0.o:	source/naif_2.0/2pac_naif_2.0.c
+									$(CC) -o $@ -c $^ $(CFLAGS) $(LDFLAGS)
+
+source/naif_2.0/piloter.o:		 	source/naif_2.0/piloter.c
+									$(CC) -o $@ -c $^ $(CFLAGS) $(LDFLAGS)
+
+$(RUN_DIR)/$(EXEC4):				$(BUILD_DIR)/$(SOURCE_DIR)/conduire.o $(BUILD_DIR)/$(SOURCE_DIR)/carte.o $(BUILD_DIR)/$(SOURCE_DIR)/liste.o $(BUILD_DIR)/$(SOURCE_DIR)/noeud.o $(BUILD_DIR)/$(SOURCE_DIR)/star.o source/naif_2.0/piloter.o source/naif_2.0/2pac_naif_2.0.o 
+									$(CC) -o $@ $^ $(LDFLAGS)
 
 
 
